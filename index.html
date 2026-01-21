@@ -428,6 +428,9 @@
           <a class="btn text" href="sms:+15016975206" aria-label="Text Finish Line Motorsports">
             💬 Text Us
           </a>
+<a class="btn text" href="#inventory" aria-label="View full inventory">
+  🚗 View Full Inventory
+</a>
 
           <!-- ✅ UPDATED: English + Spanish financing links -->
           <a class="btn fin-en" href="https://finishlinemotorsports.startyourcreditapproval.com" target="_blank" rel="noopener" aria-label="Apply for financing in English">
@@ -473,5 +476,55 @@
       By submitting a credit application you consent to be contacted. This site is for quick approvals & inventory inquiries.
     </div>
   </div>
-</body>
-</html>
+<!-- ===================== INVENTORY SECTION ===================== -->
+<section id="inventory" class="inventory">
+  <div class="invHead">
+    <h2>Full Inventory</h2>
+    <p>Scroll through available vehicles. Tap one to text us instantly.</p>
+  </div>
+
+  <div id="invGrid" class="invGrid"></div>
+</section>
+
+<script>
+  const PHONE = "15016975206";
+
+  const INVENTORY = [
+    {
+      title: "2015 GMC Yukon Denali 4WD",
+      price: 15500,
+      miles: 140000,
+      color: "Charcoal Gray",
+      notes: "Clean title • Loaded Denali • Cold A/C",
+      image: "copy_F2251ACB-8CC9-4351-8B84-317F70E3A30F.JPEG"
+    }
+  ];
+
+  const money = n => "$" + Number(n).toLocaleString();
+
+  function smsLink(msg){
+    const ios = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    return `sms:${PHONE}${ios ? "&body=" : "?body="}${encodeURIComponent(msg)}`;
+  }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const grid = document.getElementById("invGrid");
+  if (!grid) return;
+
+  grid.innerHTML = INVENTORY.map(v => {
+    const msg = `Hi Finish Line Motorsports, I'm interested in the ${v.title} listed for ${money(v.price)}. Is it available?`;
+
+    return `
+      <div class="invCard">
+        <img src="${v.image}" alt="${v.title}">
+        <div class="invInfo">
+          <strong>${v.title}</strong>
+          <div>${v.color} • ${v.miles.toLocaleString()} miles</div>
+          <div class="invPrice">${money(v.price)}</div>
+          <a class="invBtn text" href="${smsLink(msg)}">💬 Text About This Vehicle</a>
+          <a class="invBtn call" href="tel:+${PHONE}">📞 Call</a>
+        </div>
+      </div>
+    `;
+  }).join("");
+});

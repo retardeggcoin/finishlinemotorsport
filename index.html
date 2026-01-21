@@ -24,6 +24,7 @@
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
+    html{ scroll-behavior:smooth; }
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
@@ -57,7 +58,7 @@
       z-index:1;
       max-width: 1100px;
       margin: 0 auto;
-      padding: 28px 16px 60px;
+      padding: 28px 16px 30px;
     }
 
     /* top chips */
@@ -173,7 +174,6 @@
       line-height: 1.06;
       letter-spacing: -0.6px;
       font-weight: 950;
-      text-transform:none;
     }
     .subline{
       margin: 0 0 12px;
@@ -234,6 +234,7 @@
       user-select:none;
       text-transform: uppercase;
       font-size: 14px;
+      cursor:pointer;
     }
     .btn:hover{ transform: translateY(-1px); filter: brightness(1.05); }
     .btn:active{ transform: translateY(0px); filter: brightness(.98); }
@@ -362,22 +363,238 @@
     .rightFooter b{ color: rgba(255,255,255,.88); }
 
     .footnote{
-      margin-top: 16px;
+      margin: 16px 0 0;
       text-align:center;
       color: rgba(255,255,255,.60);
       font-size: 12.5px;
     }
 
+    /* ===================== INVENTORY ===================== */
+    .inventory{
+      max-width: 1100px;
+      margin: 18px auto 60px;
+      padding: 0 16px;
+      position:relative;
+      z-index:1;
+    }
+    .invWrap{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    }
+    .invHead{
+      padding: 16px 16px 12px;
+      background:
+        radial-gradient(700px 420px at 18% 18%, rgba(226,43,43,.14), transparent 60%),
+        radial-gradient(700px 420px at 80% 85%, rgba(24,184,146,.10), transparent 62%),
+        rgba(0,0,0,.18);
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .invHead h2{
+      margin:0;
+      font-size: 20px;
+      font-weight: 950;
+      letter-spacing: .2px;
+    }
+    .invHead p{
+      margin:6px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      max-width: 560px;
+    }
+    .invCount{
+      color: rgba(255,255,255,.85);
+      font-weight: 900;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .35px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.28);
+    }
+
+    .invGrid{
+      padding: 14px;
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .invCard{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+      overflow:hidden;
+      cursor:pointer;
+      transition: transform .12s ease, filter .12s ease, border-color .12s ease;
+      position:relative;
+    }
+    .invCard:hover{
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+      border-color: rgba(255,255,255,.18);
+    }
+    .invImg{
+      width:100%;
+      height: 160px;
+      object-fit: cover;
+      display:block;
+    }
+    .invBody{
+      padding: 12px 12px 12px;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .invTitle{
+      font-weight: 950;
+      font-size: 14px;
+      line-height: 1.15;
+    }
+    .invMeta{
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .invPriceRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-top: 4px;
+    }
+    .invPrice{
+      font-weight: 950;
+      font-size: 16px;
+      letter-spacing: .2px;
+    }
+    .invPill{
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .35px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.9);
+      white-space:nowrap;
+    }
+
+    /* Modal */
+    .modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      background: rgba(0,0,0,.70);
+      z-index: 9999;
+    }
+    .modal.show{ display:flex; }
+    .modalCard{
+      width: min(980px, 100%);
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(25,25,32,.96), rgba(12,12,16,.96));
+      box-shadow: 0 30px 90px rgba(0,0,0,.65);
+      overflow:hidden;
+    }
+    .modalTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+    }
+    .modalTop strong{
+      font-size: 14px;
+      font-weight: 950;
+      letter-spacing: .2px;
+    }
+    .closeBtn{
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 8px 10px;
+      cursor:pointer;
+      font-weight: 900;
+    }
+
+    .modalGrid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 0;
+    }
+    .modalImg{
+      width:100%;
+      height: 420px;
+      object-fit: cover;
+      display:block;
+      background:#000;
+    }
+    .modalInfo{
+      padding: 14px 14px 16px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .modalPrice{
+      font-size: 22px;
+      font-weight: 950;
+      letter-spacing: .2px;
+    }
+    .modalMeta{
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .modalNotes{
+      border-top: 1px solid rgba(255,255,255,.10);
+      padding-top: 10px;
+      color: rgba(255,255,255,.85);
+      font-size: 13px;
+      line-height: 1.5;
+      white-space: pre-line;
+    }
+    .modalBtns{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top: 6px;
+    }
+    .modalBtns .btn{
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+
+    /* responsive */
     @media (max-width: 920px){
       .hero{ grid-template-columns: 1fr; }
       .media{ min-height: 280px; }
       .headline{ font-size: 32px; }
+      .invGrid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .modalGrid{ grid-template-columns: 1fr; }
+      .modalImg{ height: 320px; }
     }
     @media (max-width: 520px){
       .headline{ font-size: 28px; }
       .logoBox{ width:58px; height:58px; }
       .btn{ padding: 14px 12px; }
       .big{ font-size: 24px; }
+      .invGrid{ grid-template-columns: 1fr; }
+      .invImg{ height: 180px; }
     }
   </style>
 </head>
@@ -398,7 +615,6 @@
         <div class="topbar">
           <div class="brand">
             <div class="logoBox">
-              <!-- Uses your existing uploaded logo filename -->
               <img src="E288C4E1-DDCC-4331-A991-C81C6205B4A8.PNG" alt="Finish Line Motorsports logo">
             </div>
             <div class="brandtext">
@@ -428,11 +644,12 @@
           <a class="btn text" href="sms:+15016975206" aria-label="Text Finish Line Motorsports">
             💬 Text Us
           </a>
-<a class="btn text" href="#inventory" aria-label="View full inventory">
-  🚗 View Full Inventory
-</a>
 
-          <!-- ✅ UPDATED: English + Spanish financing links -->
+          <!-- Inventory button -->
+          <a class="btn text" href="#inventory" aria-label="View full inventory">
+            🚗 View Full Inventory
+          </a>
+
           <a class="btn fin-en" href="https://finishlinemotorsports.startyourcreditapproval.com" target="_blank" rel="noopener" aria-label="Apply for financing in English">
             🧾 Apply for Financing (English)
           </a>
@@ -456,7 +673,6 @@
       <!-- RIGHT PANEL -->
       <aside class="card right" aria-label="Promotional panel">
         <div class="media">
-          <!-- Uses your existing uploaded promo image filename -->
           <img src="copy_F2251ACB-8CC9-4351-8B84-317F70E3A30F.JPEG" alt="Finish Line Motorsports promo">
           <div class="overlay">
             <div class="big">Everyone Approved.</div>
@@ -476,19 +692,51 @@
       By submitting a credit application you consent to be contacted. This site is for quick approvals & inventory inquiries.
     </div>
   </div>
-<!-- ===================== INVENTORY SECTION ===================== -->
-<section id="inventory" class="inventory">
-  <div class="invHead">
-    <h2>Full Inventory</h2>
-    <p>Scroll through available vehicles. Tap one to text us instantly.</p>
-  </div>
 
-  <div id="invGrid" class="invGrid"></div>
-</section>
+  <!-- ===================== INVENTORY SECTION ===================== -->
+  <section id="inventory" class="inventory" aria-label="Full inventory">
+    <div class="invWrap">
+      <div class="invHead">
+        <div>
+          <h2>Full Inventory</h2>
+          <p>Tap a vehicle to view full details, price, and instantly text an inquiry to (501) 697-5206.</p>
+        </div>
+        <div class="invCount" id="invCount">Loading…</div>
+      </div>
+
+      <div id="invGrid" class="invGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===================== DETAILS MODAL ===================== -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modalCard" role="dialog" aria-modal="true" aria-label="Vehicle details">
+      <div class="modalTop">
+        <strong id="mTitle">Vehicle Details</strong>
+        <button class="closeBtn" id="mClose" aria-label="Close">✕ Close</button>
+      </div>
+
+      <div class="modalGrid">
+        <img class="modalImg" id="mImg" src="" alt="Vehicle photo">
+        <div class="modalInfo">
+          <div class="modalPrice" id="mPrice">$—</div>
+          <div class="modalMeta" id="mMeta">—</div>
+          <div class="modalNotes" id="mNotes"></div>
+
+          <div class="modalBtns">
+            <a class="btn text" id="mText" href="#">💬 Text Inquiry About This Vehicle</a>
+            <a class="btn call" id="mCall" href="#">📞 Call Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <script>
   const PHONE = "15016975206";
 
+  // ✅ EDIT THIS LIST to add vehicles
+  // Tip: keep images as filenames you upload into the repo (same folder as index.html)
   const INVENTORY = [
     {
       title: "2015 GMC Yukon Denali 4WD",
@@ -507,24 +755,90 @@
     return `sms:${PHONE}${ios ? "&body=" : "?body="}${encodeURIComponent(msg)}`;
   }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const grid = document.getElementById("invGrid");
-  if (!grid) return;
+  function inquiryMsg(v){
+    return `Hi Finish Line Motorsports, I'm interested in the ${v.title} listed for ${money(v.price)}. Is it available?`;
+  }
 
-  grid.innerHTML = INVENTORY.map(v => {
-    const msg = `Hi Finish Line Motorsports, I'm interested in the ${v.title} listed for ${money(v.price)}. Is it available?`;
+  function openModal(v){
+    const modal = document.getElementById("modal");
+    const title = document.getElementById("mTitle");
+    const img = document.getElementById("mImg");
+    const price = document.getElementById("mPrice");
+    const meta = document.getElementById("mMeta");
+    const notes = document.getElementById("mNotes");
+    const textBtn = document.getElementById("mText");
+    const callBtn = document.getElementById("mCall");
 
-    return `
-      <div class="invCard">
-        <img src="${v.image}" alt="${v.title}">
-        <div class="invInfo">
-          <strong>${v.title}</strong>
-          <div>${v.color} • ${v.miles.toLocaleString()} miles</div>
-          <div class="invPrice">${money(v.price)}</div>
-          <a class="invBtn text" href="${smsLink(msg)}">💬 Text About This Vehicle</a>
-          <a class="invBtn call" href="tel:+${PHONE}">📞 Call</a>
+    title.textContent = v.title;
+    img.src = v.image;
+    img.alt = v.title;
+    price.textContent = money(v.price);
+    meta.textContent = `${v.color} • ${Number(v.miles).toLocaleString()} miles`;
+    notes.textContent = v.notes ? v.notes : "";
+
+    textBtn.href = smsLink(inquiryMsg(v));
+    callBtn.href = `tel:+${PHONE}`;
+
+    modal.classList.add("show");
+    modal.setAttribute("aria-hidden", "false");
+  }
+
+  function closeModal(){
+    const modal = document.getElementById("modal");
+    modal.classList.remove("show");
+    modal.setAttribute("aria-hidden", "true");
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Inventory render
+    const grid = document.getElementById("invGrid");
+    const count = document.getElementById("invCount");
+
+    if (count) count.textContent = `${INVENTORY.length} Vehicle${INVENTORY.length === 1 ? "" : "s"}`;
+
+    if (!grid) return;
+
+    grid.innerHTML = INVENTORY.map((v, idx) => `
+      <div class="invCard" role="button" tabindex="0" data-idx="${idx}" aria-label="View details for ${v.title}">
+        <img class="invImg" src="${v.image}" alt="${v.title}">
+        <div class="invBody">
+          <div class="invTitle">${v.title}</div>
+          <div class="invMeta">${v.color} • ${Number(v.miles).toLocaleString()} miles</div>
+          <div class="invPriceRow">
+            <div class="invPrice">${money(v.price)}</div>
+            <div class="invPill">Tap for details</div>
+          </div>
         </div>
       </div>
-    `;
-  }).join("");
-});
+    `).join("");
+
+    // Click & keyboard open
+    grid.addEventListener("click", (e) => {
+      const card = e.target.closest(".invCard");
+      if (!card) return;
+      const idx = Number(card.getAttribute("data-idx"));
+      openModal(INVENTORY[idx]);
+    });
+
+    grid.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      const card = e.target.closest(".invCard");
+      if (!card) return;
+      e.preventDefault();
+      const idx = Number(card.getAttribute("data-idx"));
+      openModal(INVENTORY[idx]);
+    });
+
+    // Modal close handlers
+    document.getElementById("mClose")?.addEventListener("click", closeModal);
+    document.getElementById("modal")?.addEventListener("click", (e) => {
+      if (e.target.id === "modal") closeModal(); // click outside card
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+  });
+</script>
+
+</body>
+</html>

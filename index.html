@@ -2,238 +2,383 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Finish Line Motorsports | Used Cars, Trucks & SUVs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta name="description" content="Finish Line Motorsports sells used cars, trucks, and SUVs with easy financing. Everyone approved. Se habla español. Call or text 501-697-5206." />
+  <title>Finish Line Motorsports | Easy Financing | Hot Springs, AR</title>
+  <meta name="description" content="Get approved today for a car, truck, or SUV. Finish Line Motorsports in Hot Springs, AR. Easy financing. Se habla español. Call/Text 501-697-5206." />
 
   <style>
     :root{
-      --red:#d62828;
-      --red2:#ff2a2a;
-      --black:#0b0b0b;
-      --char:#151515;
-      --gray:#bdbdbd;
-      --white:#ffffff;
-    }
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--white);
-      background: radial-gradient(1000px 600px at 20% 10%, #1f1f1f, var(--black));
+      --bg:#0b0b0e;
+      --card:#121218;
+      --text:#f5f6f7;
+      --muted:#b7bcc6;
+      --red:#e22b2b;
+      --red2:#b31919;
+      --green:#18b892;
+      --yellow:#f6c445;
+      --line:rgba(255,255,255,.10);
+      --shadow: 0 18px 55px rgba(0,0,0,.55);
+      --radius: 18px;
     }
 
-    /* Checkered vibe without images */
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(900px 520px at 15% 12%, rgba(226,43,43,.20), transparent 60%),
+        radial-gradient(900px 520px at 85% 18%, rgba(24,184,146,.16), transparent 60%),
+        linear-gradient(180deg, #0b0b0e 0%, #07070a 100%);
+      overflow-x:hidden;
+    }
+
+    /* subtle checkered overlay */
     .checkers{
       position:fixed;
       inset:-40px;
-      opacity:0.10;
-      background-image:
-        linear-gradient(45deg, rgba(255,255,255,.35) 25%, transparent 25%),
-        linear-gradient(-45deg, rgba(255,255,255,.35) 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, rgba(255,255,255,.35) 75%),
-        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,.35) 75%);
-      background-size: 36px 36px;
-      background-position: 0 0, 0 18px, 18px -18px, -18px 0px;
+      opacity:.12;
       pointer-events:none;
+      background-image:
+        linear-gradient(45deg, rgba(255,255,255,.12) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,.12) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,.12) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,.12) 75%);
+      background-size:34px 34px;
+      background-position:0 0, 0 17px, 17px -17px, -17px 0px;
+      filter: blur(.2px);
       z-index:0;
     }
 
     .wrap{
       position:relative;
       z-index:1;
-      max-width: 980px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 26px 16px 60px;
+      padding: 28px 16px 60px;
+    }
+
+    /* top chips */
+    .chips{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin: 8px 0 18px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border:1px solid rgba(255,255,255,.14);
+      border-radius: 999px;
+      background: rgba(0,0,0,.35);
+      backdrop-filter: blur(6px);
+      font-weight: 800;
+      letter-spacing: .3px;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .chip .dot{
+      width:8px; height:8px; border-radius:999px;
+      background: var(--red);
+      box-shadow: 0 0 14px rgba(226,43,43,.55);
+    }
+    .chip.green .dot{ background: var(--green); box-shadow:0 0 14px rgba(24,184,146,.55); }
+    .chip.yellow .dot{ background: var(--yellow); box-shadow:0 0 14px rgba(246,196,69,.55); }
+
+    /* hero grid */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      align-items:stretch;
+      margin-top: 8px;
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    /* left panel */
+    .left{
+      padding: 20px 18px 18px;
+      background:
+        radial-gradient(700px 420px at 18% 18%, rgba(226,43,43,.18), transparent 60%),
+        radial-gradient(700px 420px at 70% 80%, rgba(24,184,146,.12), transparent 62%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      position:relative;
     }
 
     .topbar{
       display:flex;
       align-items:center;
-      justify-content:center;
+      justify-content:space-between;
       gap:14px;
-      margin: 12px 0 18px;
+      margin-bottom: 14px;
     }
-
-    .badge{
-      display:inline-block;
-      padding:8px 12px;
-      border-radius:999px;
-      background: rgba(214,40,40,.15);
-      border:1px solid rgba(214,40,40,.45);
-      color:#fff;
-      font-weight:800;
-      letter-spacing:.5px;
-      text-transform:uppercase;
-      font-size:.82rem;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
     }
-
-    .hero{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:18px;
-      align-items:stretch;
-    }
-
-    @media (max-width: 860px){
-      .hero{ grid-template-columns: 1fr; }
-    }
-
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:18px;
+    .logoBox{
+      width:64px; height:64px;
+      border-radius: 14px;
+      background: rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.14);
+      display:flex; align-items:center; justify-content:center;
       overflow:hidden;
-      box-shadow: 0 25px 60px rgba(0,0,0,.45);
-      backdrop-filter: blur(6px);
+      flex: 0 0 auto;
+    }
+    .logoBox img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      padding:6px;
+    }
+    .brandtext{
+      min-width:0;
+    }
+    .brandtext .name{
+      font-weight: 950;
+      letter-spacing:.8px;
+      text-transform: uppercase;
+      font-size: 14px;
+      opacity:.95;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .brandtext .tag{
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
 
-    .card-pad{ padding: 22px 20px; }
-
-    .logo{
-      width:min(420px, 92%);
-      height:auto;
-      margin: 14px auto 10px;
-      display:block;
-      filter: drop-shadow(0 18px 22px rgba(0,0,0,.55));
+    .headline{
+      margin: 8px 0 8px;
+      font-size: 34px;
+      line-height: 1.06;
+      letter-spacing: -0.6px;
+      font-weight: 950;
+      text-transform:none;
+    }
+    .subline{
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
     }
 
-    h1{
-      margin: 8px 0 6px;
-      font-size: 2.1rem;
-      letter-spacing:.5px;
-      text-transform:uppercase;
+    .kickers{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin: 10px 0 16px;
     }
-    .sub{
-      margin: 0 0 16px;
-      color: var(--gray);
-      font-size: 1.05rem;
-      line-height:1.35;
+    .kick{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.35);
+      color: #e9ebef;
+      font-weight: 800;
+      font-size: 12px;
+    }
+    .check{
+      width:18px;height:18px;border-radius:999px;
+      display:inline-flex;align-items:center;justify-content:center;
+      background: rgba(24,184,146,.18);
+      border: 1px solid rgba(24,184,146,.45);
+      color: #bff6e8;
+      font-weight: 900;
+      font-size: 12px;
     }
 
-    .pillrow{
+    .ctaStack{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top: 14px;
+    }
+
+    .btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      text-decoration:none;
+      border-radius: 14px;
+      padding: 14px 14px;
+      font-weight: 950;
+      letter-spacing: .2px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      transition: transform .12s ease, filter .12s ease;
+      user-select:none;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+    .btn:active{ transform: translateY(0px); filter: brightness(.98); }
+
+    .btn.call{
+      background: linear-gradient(180deg, rgba(226,43,43,.98), rgba(179,25,25,.98));
+      border-color: rgba(226,43,43,.55);
+    }
+    .btn.text{
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+    }
+    .btn.fin-en{
+      background: linear-gradient(180deg, rgba(24,184,146,.96), rgba(14,140,110,.96));
+      border-color: rgba(24,184,146,.55);
+    }
+    .btn.fin-es{
+      background: linear-gradient(180deg, rgba(246,196,69,.98), rgba(214,156,36,.98));
+      color:#121218;
+      border-color: rgba(246,196,69,.65);
+    }
+
+    .smallRow{
       display:flex;
       flex-wrap:wrap;
       gap:10px;
-      margin: 12px 0 18px;
-      justify-content:center;
+      align-items:center;
+      justify-content:space-between;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      font-size: 13px;
     }
-    .pill{
-      padding:10px 12px;
-      border-radius:999px;
-      background: rgba(0,0,0,.35);
-      border:1px solid rgba(255,255,255,.12);
-      font-weight:700;
-      color:#fff;
-      font-size:.95rem;
-    }
-    .pill strong{ color: var(--red2); }
 
-    .cta{
-      display:block;
-      width:100%;
+    .addr{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      min-width:0;
+    }
+    .addr a{
+      color: var(--text);
       text-decoration:none;
-      padding: 16px 14px;
-      border-radius: 12px;
-      font-weight:900;
-      letter-spacing:.3px;
-      text-transform:uppercase;
-      margin: 10px 0;
-      border: none;
-      text-align:center;
-      transition: transform .08s ease, opacity .08s ease;
+      border-bottom: 1px dashed rgba(255,255,255,.35);
     }
-    .cta:active{ transform: translateY(1px); }
-    .cta:hover{ opacity:.94; }
+    .addr a:hover{ border-bottom-color: rgba(255,255,255,.75); }
 
-    .cta-call{
-      background: linear-gradient(90deg, var(--red), #ff3b3b);
-      color:#fff;
-      box-shadow: 0 14px 28px rgba(214,40,40,.25);
-    }
-    .cta-text{
-      background: linear-gradient(90deg, #222, #111);
-      color:#fff;
-      border:1px solid rgba(255,255,255,.14);
-    }
-    .cta-finance{
-      background: linear-gradient(90deg, #10b981, #2a9d8f);
-      color:#fff;
-      box-shadow: 0 14px 28px rgba(16,185,129,.18);
-    }
-
-    .fine{
-      margin-top:12px;
-      color:#cfcfcf;
-      font-size:.95rem;
-      line-height:1.35;
+    .site{
       opacity:.9;
-      text-align:center;
+      font-weight: 900;
+      color: rgba(255,255,255,.88);
     }
-    .fine a{ color:#fff; }
 
-    /* Right image panel */
-    .photo{
+    /* right panel */
+    .right{
       position:relative;
-      min-height: 420px;
-      background:#000;
+      display:flex;
+      flex-direction:column;
+      min-height: 100%;
     }
-    .photo img{
+    .media{
+      position:relative;
+      flex:1;
+      min-height: 340px;
+      overflow:hidden;
+    }
+    .media img{
       width:100%;
       height:100%;
       object-fit: cover;
-      display:block;
-      filter: contrast(1.05) saturate(1.05);
+      filter: contrast(1.05) saturate(1.02);
+      transform: scale(1.02);
     }
-    .photo::after{
+    .media:after{
       content:"";
       position:absolute;
       inset:0;
-      background: linear-gradient(0deg, rgba(0,0,0,.75), rgba(0,0,0,.15) 55%, rgba(0,0,0,.65));
-      pointer-events:none;
-    }
-    .overlay{
-      position:absolute;
-      inset:auto 0 0 0;
-      padding: 18px 16px 16px;
-      z-index:2;
-      text-align:left;
-    }
-    .overlay .big{
-      font-weight: 1000;
-      text-transform:uppercase;
-      letter-spacing:.8px;
-      font-size: 1.55rem;
-      margin:0 0 6px;
-      text-shadow: 0 10px 20px rgba(0,0,0,.7);
-    }
-    .overlay .yellow{
-      display:inline-block;
-      margin:6px 0 6px;
-      padding: 8px 10px;
-      border-radius: 10px;
-      background: #ffd60a;
-      color:#000;
-      font-weight:1000;
-      text-transform:uppercase;
-      letter-spacing:.6px;
-    }
-    .overlay .spanish{
-      font-size: 1.35rem;
-      font-weight: 1000;
-      margin: 6px 0 0;
-      text-shadow: 0 10px 20px rgba(0,0,0,.7);
+      background: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.72));
     }
 
-    .footer{
-      margin-top: 18px;
-      text-align:center;
-      color:#a9a9a9;
-      font-size:.92rem;
-      opacity:.9;
+    .overlay{
+      position:absolute;
+      inset:0;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      padding: 18px;
+      gap:10px;
     }
-    .footer strong{ color:#fff; }
+    .big{
+      font-size: 28px;
+      font-weight: 950;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+    }
+    .highlight{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 8px 12px;
+      border-radius: 12px;
+      background: rgba(246,196,69,.98);
+      color:#101015;
+      font-weight: 950;
+      width: fit-content;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      font-size: 14px;
+    }
+    .spanish{
+      font-size: 18px;
+      font-weight: 950;
+    }
+
+    .rightFooter{
+      padding: 14px 16px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.25);
+      color: var(--muted);
+      font-size: 13px;
+      display:flex;
+      gap:10px;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .rightFooter b{ color: rgba(255,255,255,.88); }
+
+    .footnote{
+      margin-top: 16px;
+      text-align:center;
+      color: rgba(255,255,255,.60);
+      font-size: 12.5px;
+    }
+
+    @media (max-width: 920px){
+      .hero{ grid-template-columns: 1fr; }
+      .media{ min-height: 280px; }
+      .headline{ font-size: 32px; }
+    }
+    @media (max-width: 520px){
+      .headline{ font-size: 28px; }
+      .logoBox{ width:58px; height:58px; }
+      .btn{ padding: 14px 12px; }
+      .big{ font-size: 24px; }
+    }
   </style>
 </head>
 
@@ -241,66 +386,92 @@
   <div class="checkers"></div>
 
   <div class="wrap">
-
-    <div class="topbar">
-      <span class="badge">Everyone Approved</span>
-      <span class="badge">Easy Financing</span>
-      <span class="badge">Se Habla Español</span>
+    <div class="chips">
+      <div class="chip"><span class="dot"></span> Everyone Approved</div>
+      <div class="chip green"><span class="dot"></span> Easy Financing</div>
+      <div class="chip yellow"><span class="dot"></span> Se Habla Español</div>
     </div>
 
     <div class="hero">
-
-      <!-- LEFT: Offer + buttons -->
-      <div class="card">
-        <div class="card-pad">
-          <!-- Put your logo file next to index.html and name it logo.png -->
-          <img class="logo" src="logo.png" alt="Finish Line Motorsports Logo" />
-
-          <h1>Used Cars • Trucks • SUVs</h1>
-          <p class="sub">
-            Fast approvals. Simple process. <strong>All credit types welcome.</strong><br>
-            Call or text now — we’ll get you handled.
-          </p>
-
-          <div class="pillrow">
-            <div class="pill">✔ <strong>Easy</strong> Financing</div>
-            <div class="pill">✔ <strong>Quick</strong> Approvals</div>
-            <div class="pill">✔ Trade-ins Welcome</div>
+      <!-- LEFT PANEL -->
+      <section class="card left" aria-label="Finish Line Motorsports quick approval landing page">
+        <div class="topbar">
+          <div class="brand">
+            <div class="logoBox">
+              <!-- Uses your existing uploaded logo filename -->
+              <img src="E288C4E1-DDCC-4331-A991-C81C6205B4A8.PNG" alt="Finish Line Motorsports logo">
+            </div>
+            <div class="brandtext">
+              <div class="name">Finish Line Motorsports</div>
+              <div class="tag">Used Cars • Trucks • SUVs • Hot Springs, AR</div>
+            </div>
           </div>
+        </div>
 
-          <a class="cta cta-call" href="tel:15016975206">📞 Call 501-697-5206</a>
-          <a class="cta cta-text" href="sms:15016975206">💬 Text Us</a>
+        <h1 class="headline">Get Approved Today for a Car, Truck, or SUV</h1>
+        <p class="subline">
+          Fast approvals. Simple process. <b>All credit types welcome.</b><br />
+          Call or text now — we’ll get you handled.
+        </p>
 
-          <a class="cta cta-finance"
-             href="https://andrewstreetsmartautoplex.startyourcreditapproval.com/"
-             target="_blank" rel="noopener">
-            💳 Apply for Financing
+        <div class="kickers">
+          <div class="kick"><span class="check">✓</span> Easy Financing</div>
+          <div class="kick"><span class="check">✓</span> Quick Approvals</div>
+          <div class="kick"><span class="check">✓</span> Trade-ins Welcome</div>
+        </div>
+
+        <div class="ctaStack">
+          <a class="btn call" href="tel:+15016975206" aria-label="Call Finish Line Motorsports">
+            📞 Call 501-697-5206
           </a>
 
-          <div class="fine">
-            📍159 Weston Rd STE A Hot Springs, AR<br>
-            <strong>FinishLineMotorsport.com</strong>
+          <a class="btn text" href="sms:+15016975206" aria-label="Text Finish Line Motorsports">
+            💬 Text Us
+          </a>
+
+          <!-- ✅ UPDATED: English + Spanish financing links -->
+          <a class="btn fin-en" href="https://finishlinemotorsports.startyourcreditapproval.com" target="_blank" rel="noopener" aria-label="Apply for financing in English">
+            🧾 Apply for Financing (English)
+          </a>
+
+          <a class="btn fin-es" href="https://finishlinemotorsports.startyourcreditapproval.com?lang=es" target="_blank" rel="noopener" aria-label="Aplicar para financiamiento en Español">
+            🇲🇽 Aplicar para Financiamiento (Español)
+          </a>
+        </div>
+
+        <div class="smallRow">
+          <div class="addr">
+            📍
+            <a href="https://www.google.com/maps/search/?api=1&query=159+Weston+Rd+STE+A+Hot+Springs+AR+71913" target="_blank" rel="noopener">
+              159 Weston Rd STE A, Hot Springs, AR 71913
+            </a>
+          </div>
+          <div class="site">FinishLineMotorsport.com</div>
+        </div>
+      </section>
+
+      <!-- RIGHT PANEL -->
+      <aside class="card right" aria-label="Promotional panel">
+        <div class="media">
+          <!-- Uses your existing uploaded promo image filename -->
+          <img src="copy_F2251ACB-8CC9-4351-8B84-317F70E3A30F.JPEG" alt="Finish Line Motorsports promo">
+          <div class="overlay">
+            <div class="big">Everyone Approved.</div>
+            <div class="highlight">Easy Financing.</div>
+            <div class="spanish">Se habla español!</div>
           </div>
         </div>
-      </div>
 
-      <!-- RIGHT: Photo panel -->
-      <div class="card photo">
-        <!-- Put your lot image next to index.html and name it lot.jpg -->
-        <img src="lot.jpg" alt="Finish Line Motorsports inventory lot" />
-        <div class="overlay">
-          <p class="big">Everyone Approved.</p>
-          <span class="yellow">Easy Financing.</span>
-          <p class="spanish">Se habla español!</p>
+        <div class="rightFooter">
+          <div>Questions? <b>Call/Text 501-697-5206</b></div>
+          <div>Tap <b>Financing</b> to get started.</div>
         </div>
-      </div>
-
+      </aside>
     </div>
 
-    <div class="footer">
-      Questions? <strong>Call/Text 501-697-5206</strong> • Tap <strong>Apply for Financing</strong> to get started.
+    <div class="footnote">
+      By submitting a credit application you consent to be contacted. This site is for quick approvals & inventory inquiries.
     </div>
-
   </div>
 </body>
 </html>

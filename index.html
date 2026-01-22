@@ -24,6 +24,7 @@
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
+    html{ scroll-behavior:smooth; }
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
@@ -173,7 +174,6 @@
       line-height: 1.06;
       letter-spacing: -0.6px;
       font-weight: 950;
-      text-transform:none;
     }
     .subline{
       margin: 0 0 12px;
@@ -362,16 +362,7 @@
     }
     .rightFooter b{ color: rgba(255,255,255,.88); }
 
-    .footnote{
-      margin: 16px auto 0;
-      max-width:1100px;
-      padding: 0 16px 40px;
-      text-align:center;
-      color: rgba(255,255,255,.60);
-      font-size: 12.5px;
-    }
-
-    /* ================= INVENTORY SECTION ================= */
+    /* ================= INVENTORY ================= */
     section.inventory{
       max-width:1100px;
       margin: 18px auto 0;
@@ -631,6 +622,8 @@
       height:100%;
       object-fit: cover;
       display:block;
+      user-select:none;
+      -webkit-user-drag:none;
     }
     .imgNav{
       position:absolute;
@@ -693,6 +686,7 @@
       font-size: 13px;
       line-height: 1.35;
       min-height: 44px;
+      white-space: pre-line;
     }
 
     .mBtns{
@@ -733,20 +727,13 @@
       border-color: rgba(246,196,69,.65);
     }
 
-    /* Smooth anchor */
-    html{ scroll-behavior:smooth; }
-
-    @media (max-width: 920px){
-      .hero{ grid-template-columns: 1fr; }
-      .media{ min-height: 280px; }
-      .headline{ font-size: 32px; }
-    }
-    @media (max-width: 520px){
-      .headline{ font-size: 28px; }
-      .logoBox{ width:58px; height:58px; }
-      .btn{ padding: 14px 12px; }
-      .big{ font-size: 24px; }
-      .modalMedia{ min-height: 240px; }
+    .footnote{
+      margin: 16px auto 0;
+      max-width:1100px;
+      padding: 0 16px 40px;
+      text-align:center;
+      color: rgba(255,255,255,.60);
+      font-size: 12.5px;
     }
   </style>
 </head>
@@ -789,25 +776,12 @@
         </div>
 
         <div class="ctaStack">
-          <a class="btn call" href="tel:+15016975206" aria-label="Call Finish Line Motorsports">
-            📞 Call 501-697-5206
-          </a>
+          <a class="btn call" href="tel:+15016975206" aria-label="Call Finish Line Motorsports">📞 Call 501-697-5206</a>
+          <a class="btn text" href="sms:+15016975206" aria-label="Text Finish Line Motorsports">💬 Text Us</a>
+          <a class="btn text" href="#inventory" aria-label="View full inventory">🚗 View Full Inventory</a>
 
-          <a class="btn text" href="sms:+15016975206" aria-label="Text Finish Line Motorsports">
-            💬 Text Us
-          </a>
-
-          <a class="btn text" href="#inventory" aria-label="View full inventory">
-            🚗 View Full Inventory
-          </a>
-
-          <a class="btn fin-en" href="https://finishlinemotorsports.startyourcreditapproval.com" target="_blank" rel="noopener" aria-label="Apply for financing in English">
-            🧾 Apply for Financing (English)
-          </a>
-
-          <a class="btn fin-es" href="https://finishlinemotorsports.startyourcreditapproval.com?lang=es" target="_blank" rel="noopener" aria-label="Aplicar para financiamiento en Español">
-            🇲🇽 Aplicar para Financiamiento (Español)
-          </a>
+          <a class="btn fin-en" href="https://finishlinemotorsports.startyourcreditapproval.com" target="_blank" rel="noopener">🧾 Apply for Financing (English)</a>
+          <a class="btn fin-es" href="https://finishlinemotorsports.startyourcreditapproval.com?lang=es" target="_blank" rel="noopener">🇲🇽 Aplicar para Financiamiento (Español)</a>
         </div>
 
         <div class="smallRow">
@@ -850,7 +824,7 @@
         </div>
 
         <div class="filters">
-          <div id="invCount" class="invCount">0 Vehicles Available</div>
+          <div id="invCount" class="invCount">Loading…</div>
           <button class="fbtn active" data-filter="ALL">All</button>
           <button class="fbtn" data-filter="TRUCK">Trucks</button>
           <button class="fbtn" data-filter="SUV">SUVs</button>
@@ -906,45 +880,19 @@
   const FIN_EN = "https://finishlinemotorsports.startyourcreditapproval.com";
   const FIN_ES = "https://finishlinemotorsports.startyourcreditapproval.com?lang=es";
 
-  // ===================== INVENTORY DATA =====================
-  // Add more vehicles by copying one block and changing the fields.
-  // category: "TRUCK" | "SUV" | "CAR"
-  // badges: use any words (example: "CLEAN TITLE", "4WD", "NEW ARRIVAL")
-  const INVENTORY = [
-    {
-      id: "yukon2015",
-      title: "2015 GMC Yukon Denali 4WD",
-      category: "SUV",
-      price: 15500,
-      miles: 140000,
-      color: "Charcoal Gray",
-      notes: "Clean title • Loaded Denali • Cold A/C",
-      badges: ["CLEAN TITLE", "4WD", "DENALI"],
-      images: [
-        "copy_F2251ACB-8CC9-4351-8B84-317F70E3A30F.JPEG"
-        // Add more images here if you upload them:
-        // "yukon2.jpg",
-        // "yukon3.jpg"
-      ]
-    }
+  // ✅ PASTE YOUR “Publish to web” CSV LINK HERE:
+  // In Google Sheets: File → Share → Publish to web → CSV → Copy link
+  const SHEET_CSV_URL = "PASTE_YOUR_PUBLISHED_CSV_LINK_HERE";
 
-    // مثال / Example:
-    // {
-    //   id:"silverado2011",
-    //   title:"2011 Chevrolet Silverado 1500 LT",
-    //   category:"TRUCK",
-    //   price:7500,
-    //   miles:228823,
-    //   color:"Black",
-    //   notes:"Runs & drives great • Clean title • Cold A/C",
-    //   badges:["TRUCK","CLEAN TITLE","NEW ARRIVAL"],
-    //   images:["silverado1.jpg","silverado2.jpg"]
-    // }
-  ];
+  // will be filled from sheet
+  let INVENTORY = [];
+  let activeFilter = "ALL";
+  let currentVehicle = null;
+  let imgIndex = 0;
 
   // ===================== HELPERS =====================
-  const money = n => "$" + Number(n).toLocaleString();
-  const milesFmt = n => Number(n).toLocaleString() + " miles";
+  const money = n => "$" + Number(n || 0).toLocaleString();
+  const milesFmt = n => Number(n || 0).toLocaleString() + " miles";
 
   function smsLink(message){
     const ios = /iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -959,9 +907,81 @@
     return "";
   }
 
-  // ===================== RENDER INVENTORY =====================
-  let activeFilter = "ALL";
+  function splitList(v){
+    return String(v || "").split(",").map(s => s.trim()).filter(Boolean);
+  }
 
+  function toNum(v){
+    const n = String(v || "").replace(/[^\d.]/g, "");
+    return n ? Number(n) : 0;
+  }
+
+  // ===================== CSV PARSER =====================
+  function parseCSV(text){
+    const rows = [];
+    let row = [], field = "", inQuotes = false;
+
+    for (let i = 0; i < text.length; i++){
+      const c = text[i];
+      const next = text[i+1];
+
+      if (c === '"' && inQuotes && next === '"'){ field += '"'; i++; continue; }
+      if (c === '"'){ inQuotes = !inQuotes; continue; }
+
+      if (c === "," && !inQuotes){ row.push(field); field = ""; continue; }
+
+      if ((c === "\n" || c === "\r") && !inQuotes){
+        if (field.length || row.length){
+          row.push(field); field = "";
+          rows.push(row);
+          row = [];
+        }
+        if (c === "\r" && next === "\n") i++;
+        continue;
+      }
+
+      field += c;
+    }
+
+    if (field.length || row.length){
+      row.push(field);
+      rows.push(row);
+    }
+    return rows;
+  }
+
+  async function loadInventoryFromSheet(){
+    // cache bust
+    const url = SHEET_CSV_URL + (SHEET_CSV_URL.includes("?") ? "&" : "?") + "v=" + Date.now();
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) throw new Error("Sheet fetch failed: " + res.status);
+
+    const csv = await res.text();
+    const rows = parseCSV(csv);
+    const header = rows.shift().map(h => String(h).trim().toLowerCase());
+
+    const idx = (name) => header.indexOf(name);
+
+    INVENTORY = rows
+      .filter(r => r.some(cell => String(cell).trim() !== ""))
+      .map(r => ({
+        id: (r[idx("id")] || "").trim() || ("v" + Math.random().toString(16).slice(2)),
+        title: (r[idx("title")] || "").trim(),
+        category: (r[idx("category")] || "CAR").trim().toUpperCase(),
+        price: toNum(r[idx("price")]),
+        miles: toNum(r[idx("miles")]),
+        color: (r[idx("color")] || "").trim(),
+        drivetrain: (r[idx("drivetrain")] || "").trim(),
+        cab: (r[idx("cab")] || "").trim(),
+        title_status: (r[idx("title_status")] || "").trim(),
+        notes: (r[idx("notes")] || "").trim(),
+        badges: splitList(r[idx("badges")]),
+        images: splitList(r[idx("photos")]),
+      }))
+      .filter(v => v.title);
+  }
+
+  // ===================== FILTER / COUNT =====================
   function getFiltered(){
     if (activeFilter === "ALL") return INVENTORY;
     return INVENTORY.filter(v => v.category === activeFilter);
@@ -973,6 +993,7 @@
     el.textContent = `${n} Vehicle${n === 1 ? "" : "s"} Available`;
   }
 
+  // ===================== RENDER INVENTORY =====================
   function renderInventory(){
     const grid = document.getElementById("invGrid");
     if (!grid) return;
@@ -995,7 +1016,7 @@
           </div>
           <div class="invBody">
             <p class="invName">${v.title}</p>
-            <p class="invMeta">${v.color} • ${milesFmt(v.miles)}</p>
+            <p class="invMeta">${v.color}${v.cab ? " • " + v.cab : ""}${v.drivetrain ? " • " + v.drivetrain : ""} • ${milesFmt(v.miles)}</p>
             <div class="invPriceRow">
               <div class="invPrice">${money(v.price)}</div>
               <div class="invCtaMini">Tap for details</div>
@@ -1005,7 +1026,6 @@
       `;
     }).join("");
 
-    // click handlers
     grid.querySelectorAll(".invCard").forEach(card => {
       card.addEventListener("click", () => openVehicle(card.dataset.id));
       card.addEventListener("keydown", (e) => {
@@ -1014,7 +1034,7 @@
     });
   }
 
-  // ===================== MODAL LOGIC (multi-photo) =====================
+  // ===================== MODAL =====================
   const backdrop = document.getElementById("modalBackdrop");
   const mTitle = document.getElementById("mTitle");
   const mImg = document.getElementById("mImg");
@@ -1029,9 +1049,6 @@
   const mPrev = document.getElementById("mPrev");
   const mNext = document.getElementById("mNext");
   const mClose = document.getElementById("mClose");
-
-  let currentVehicle = null;
-  let imgIndex = 0;
 
   function setDots(total, on){
     if (!mDots) return;
@@ -1052,7 +1069,6 @@
     mImg.src = imgs[imgIndex];
     setDots(imgs.length, imgIndex);
 
-    // hide nav buttons if only 1 image
     const many = imgs.length > 1;
     mPrev.style.display = many ? "inline-flex" : "none";
     mNext.style.display = many ? "inline-flex" : "none";
@@ -1068,7 +1084,16 @@
 
     mTitle.textContent = v.title;
     mPrice.textContent = money(v.price);
-    mMeta.textContent = `${v.color} • ${milesFmt(v.miles)}`;
+
+    const metaBits = [
+      v.color,
+      v.cab,
+      v.drivetrain,
+      milesFmt(v.miles),
+      v.title_status ? (v.title_status + " title") : ""
+    ].filter(Boolean);
+
+    mMeta.textContent = metaBits.join(" • ");
     mNotes.textContent = v.notes || "—";
 
     const msg = `Hi Finish Line Motorsports, I'm interested in the ${v.title} listed for ${money(v.price)}. Is it available?`;
@@ -1092,9 +1117,7 @@
   }
 
   mClose.addEventListener("click", closeModal);
-  backdrop.addEventListener("click", (e) => {
-    if (e.target === backdrop) closeModal();
-  });
+  backdrop.addEventListener("click", (e) => { if (e.target === backdrop) closeModal(); });
 
   document.addEventListener("keydown", (e) => {
     if (!backdrop.classList.contains("show")) return;
@@ -1106,7 +1129,7 @@
   mPrev.addEventListener("click", (e) => { e.preventDefault(); showImage(imgIndex - 1); });
   mNext.addEventListener("click", (e) => { e.preventDefault(); showImage(imgIndex + 1); });
 
-  // basic swipe (mobile)
+  // swipe
   let touchStartX = 0;
   let touchEndX = 0;
   mImg.addEventListener("touchstart", (e)=>{ touchStartX = e.changedTouches[0].screenX; }, {passive:true});
@@ -1121,16 +1144,40 @@
   // ===================== FILTER BUTTONS =====================
   function setActiveFilter(filter){
     activeFilter = filter;
-    document.querySelectorAll(".fbtn").forEach(b => {
-      b.classList.toggle("active", b.dataset.filter === filter);
-    });
+    document.querySelectorAll(".fbtn").forEach(b => b.classList.toggle("active", b.dataset.filter === filter));
     renderInventory();
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".fbtn").forEach(btn => {
-      btn.addEventListener("click", () => setActiveFilter(btn.dataset.filter));
-    });
+  // ===================== INIT =====================
+  document.addEventListener("DOMContentLoaded", async () => {
+    // wire filter buttons
+    document.querySelectorAll(".fbtn").forEach(btn => btn.addEventListener("click", () => setActiveFilter(btn.dataset.filter)));
+
+    // load sheet
+    try{
+      if (!SHEET_CSV_URL || SHEET_CSV_URL.includes("PASTE_YOUR_PUBLISHED_CSV_LINK_HERE")){
+        throw new Error("Missing SHEET_CSV_URL. Paste your published CSV link into the code.");
+      }
+      await loadInventoryFromSheet();
+    }catch(err){
+      console.warn(err);
+      // fallback demo vehicle so the page isn't empty
+      INVENTORY = [{
+        id:"demo-silverado2011",
+        title:"2011 Chevrolet Silverado 1500 LT Extended Cab 4x2",
+        category:"TRUCK",
+        price:7500,
+        miles:228823,
+        color:"Black",
+        drivetrain:"4x2",
+        cab:"Extended Cab",
+        title_status:"Clean",
+        notes:"Runs & drives good. Cold A/C, heat works, tow package, bedcover w/ lock & key. No known issues.",
+        badges:["CLEAN TITLE","WORK TRUCK","BEST DEAL"],
+        images:["copy_F2251ACB-8CC9-4351-8B84-317F70E3A30F.JPEG"]
+      }];
+    }
+
     renderInventory();
   });
 </script>

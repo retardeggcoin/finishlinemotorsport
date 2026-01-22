@@ -880,9 +880,8 @@
   const FIN_EN = "https://finishlinemotorsports.startyourcreditapproval.com";
   const FIN_ES = "https://finishlinemotorsports.startyourcreditapproval.com?lang=es";
 
-  // ✅ PASTE YOUR “Publish to web” CSV LINK HERE:
-  // In Google Sheets: File → Share → Publish to web → CSV → Copy link
-  const SHEET_CSV_URL = "PASTE_YOUR_PUBLISHED_CSV_LINK_HERE";
+  // ✅ YOUR LIVE GOOGLE SHEET CSV LINK (already added)
+  const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSWxE2_mvFfV4vlrPJGQHpnSJOwK9WYqTrKFejLy2nFNslimAhRB0uHLSe0_Ya3hGLL5kU5T-KRmUKT/pub?gid=2136506349&single=true&output=csv";
 
   // will be filled from sheet
   let INVENTORY = [];
@@ -1150,30 +1149,25 @@
 
   // ===================== INIT =====================
   document.addEventListener("DOMContentLoaded", async () => {
-    // wire filter buttons
     document.querySelectorAll(".fbtn").forEach(btn => btn.addEventListener("click", () => setActiveFilter(btn.dataset.filter)));
 
-    // load sheet
     try{
-      if (!SHEET_CSV_URL || SHEET_CSV_URL.includes("PASTE_YOUR_PUBLISHED_CSV_LINK_HERE")){
-        throw new Error("Missing SHEET_CSV_URL. Paste your published CSV link into the code.");
-      }
       await loadInventoryFromSheet();
     }catch(err){
       console.warn(err);
-      // fallback demo vehicle so the page isn't empty
+      // fallback so page isn't empty if sheet headers/rows aren't ready yet
       INVENTORY = [{
-        id:"demo-silverado2011",
-        title:"2011 Chevrolet Silverado 1500 LT Extended Cab 4x2",
-        category:"TRUCK",
-        price:7500,
-        miles:228823,
-        color:"Black",
-        drivetrain:"4x2",
-        cab:"Extended Cab",
-        title_status:"Clean",
-        notes:"Runs & drives good. Cold A/C, heat works, tow package, bedcover w/ lock & key. No known issues.",
-        badges:["CLEAN TITLE","WORK TRUCK","BEST DEAL"],
+        id:"demo",
+        title:"Add vehicles in Google Sheet to populate inventory",
+        category:"CAR",
+        price:0,
+        miles:0,
+        color:"—",
+        drivetrain:"",
+        cab:"",
+        title_status:"",
+        notes:"Your sheet is connected. Now add your inventory rows and image URLs.",
+        badges:["CONNECTED"],
         images:["copy_F2251ACB-8CC9-4351-8B84-317F70E3A30F.JPEG"]
       }];
     }

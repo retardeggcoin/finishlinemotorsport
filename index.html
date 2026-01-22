@@ -24,7 +24,6 @@
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
-    html{ scroll-behavior:smooth; }
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
@@ -174,6 +173,7 @@
       line-height: 1.06;
       letter-spacing: -0.6px;
       font-weight: 950;
+      text-transform:none;
     }
     .subline{
       margin: 0 0 12px;
@@ -363,238 +363,390 @@
     .rightFooter b{ color: rgba(255,255,255,.88); }
 
     .footnote{
-      margin: 16px 0 0;
+      margin: 16px auto 0;
+      max-width:1100px;
+      padding: 0 16px 40px;
       text-align:center;
       color: rgba(255,255,255,.60);
       font-size: 12.5px;
     }
 
-    /* ===================== INVENTORY ===================== */
-    .inventory{
-      max-width: 1100px;
-      margin: 18px auto 60px;
-      padding: 0 16px;
+    /* ================= INVENTORY SECTION ================= */
+    section.inventory{
+      max-width:1100px;
+      margin: 18px auto 0;
+      padding: 0 16px 70px;
       position:relative;
       z-index:1;
     }
-    .invWrap{
-      border-radius: var(--radius);
+    .invShell{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
       border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
     }
-    .invHead{
-      padding: 16px 16px 12px;
-      background:
-        radial-gradient(700px 420px at 18% 18%, rgba(226,43,43,.14), transparent 60%),
-        radial-gradient(700px 420px at 80% 85%, rgba(24,184,146,.10), transparent 62%),
-        rgba(0,0,0,.18);
-      border-bottom: 1px solid rgba(255,255,255,.10);
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-    .invHead h2{
-      margin:0;
-      font-size: 20px;
-      font-weight: 950;
-      letter-spacing: .2px;
-    }
-    .invHead p{
-      margin:6px 0 0;
-      color: var(--muted);
-      font-size: 13px;
-      max-width: 560px;
-    }
-    .invCount{
-      color: rgba(255,255,255,.85);
-      font-weight: 900;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .35px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.28);
-    }
-
-    .invGrid{
-      padding: 14px;
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .invCard{
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.22);
-      overflow:hidden;
-      cursor:pointer;
-      transition: transform .12s ease, filter .12s ease, border-color .12s ease;
-      position:relative;
-    }
-    .invCard:hover{
-      transform: translateY(-2px);
-      filter: brightness(1.05);
-      border-color: rgba(255,255,255,.18);
-    }
-    .invImg{
-      width:100%;
-      height: 160px;
-      object-fit: cover;
-      display:block;
-    }
-    .invBody{
-      padding: 12px 12px 12px;
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-    }
-    .invTitle{
-      font-weight: 950;
-      font-size: 14px;
-      line-height: 1.15;
-    }
-    .invMeta{
-      color: var(--muted);
-      font-size: 12px;
-    }
-    .invPriceRow{
+    .invTop{
+      padding: 14px 16px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:10px;
-      margin-top: 4px;
+      gap:12px;
+      flex-wrap:wrap;
+      background: rgba(0,0,0,.18);
+      border-bottom: 1px solid rgba(255,255,255,.10);
     }
-    .invPrice{
+    .invTitle{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      min-width:220px;
+    }
+    .invTitle h2{
+      margin:0;
+      font-size: 18px;
       font-weight: 950;
-      font-size: 16px;
-      letter-spacing: .2px;
+      letter-spacing:.2px;
     }
-    .invPill{
-      font-size: 11px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: .35px;
-      padding: 6px 9px;
+    .invTitle p{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .invCount{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: rgba(255,255,255,.9);
+      background: rgba(0,0,0,.28);
+      border: 1px solid rgba(255,255,255,.12);
+      font-weight: 950;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing:.3px;
+      color: rgba(255,255,255,.92);
       white-space:nowrap;
     }
 
-    /* Modal */
-    .modal{
+    .filters{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-end;
+    }
+    .fbtn{
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.25);
+      color: rgba(255,255,255,.92);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing:.25px;
+      text-transform: uppercase;
+      cursor:pointer;
+      user-select:none;
+      transition: filter .12s ease, transform .12s ease;
+    }
+    .fbtn:hover{ filter: brightness(1.08); transform: translateY(-1px); }
+    .fbtn.active{
+      background: linear-gradient(180deg, rgba(226,43,43,.30), rgba(226,43,43,.14));
+      border-color: rgba(226,43,43,.55);
+      box-shadow: 0 0 18px rgba(226,43,43,.18);
+    }
+
+    .invGrid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 14px;
+      padding: 14px;
+    }
+    @media (max-width: 980px){ .invGrid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (max-width: 620px){ .invGrid{ grid-template-columns: 1fr; } }
+
+    .invCard{
+      border-radius: 16px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.28);
+      display:flex;
+      flex-direction:column;
+      min-height: 100%;
+      cursor:pointer;
+      transition: transform .12s ease, filter .12s ease;
+    }
+    .invCard:hover{ transform: translateY(-2px); filter: brightness(1.05); }
+    .invMedia{
+      position:relative;
+      aspect-ratio: 16 / 9;
+      overflow:hidden;
+      background: rgba(255,255,255,.04);
+    }
+    .invMedia img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+      transform: scale(1.02);
+      filter: contrast(1.05) saturate(1.02);
+    }
+    .badgeRow{
+      position:absolute;
+      top:10px;
+      left:10px;
+      right:10px;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-start;
+      pointer-events:none;
+    }
+    .badge{
+      pointer-events:none;
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-weight: 950;
+      font-size: 11px;
+      letter-spacing:.3px;
+      text-transform: uppercase;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.42);
+      backdrop-filter: blur(6px);
+      color: rgba(255,255,255,.92);
+    }
+    .badge.red{ border-color: rgba(226,43,43,.55); box-shadow: 0 0 14px rgba(226,43,43,.18); }
+    .badge.green{ border-color: rgba(24,184,146,.55); box-shadow: 0 0 14px rgba(24,184,146,.16); }
+    .badge.yellow{ border-color: rgba(246,196,69,.55); box-shadow: 0 0 14px rgba(246,196,69,.16); }
+
+    .invBody{
+      padding: 12px 12px 14px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      flex:1;
+    }
+    .invName{
+      font-weight: 950;
+      font-size: 14px;
+      line-height:1.2;
+      margin:0;
+    }
+    .invMeta{
+      color: var(--muted);
+      font-size: 12.5px;
+      margin:0;
+    }
+    .invPriceRow{
+      margin-top:auto;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .invPrice{
+      font-weight: 950;
+      font-size: 18px;
+      letter-spacing:.2px;
+    }
+    .invCtaMini{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      font-weight: 950;
+      text-transform: uppercase;
+      font-size: 11px;
+      color: rgba(255,255,255,.92);
+      white-space:nowrap;
+    }
+
+    /* ================= MODAL ================= */
+    .modalBackdrop{
       position:fixed;
       inset:0;
+      background: rgba(0,0,0,.72);
       display:none;
       align-items:center;
       justify-content:center;
       padding: 18px;
-      background: rgba(0,0,0,.70);
       z-index: 9999;
     }
-    .modal.show{ display:flex; }
-    .modalCard{
+    .modalBackdrop.show{ display:flex; }
+    .modal{
       width: min(980px, 100%);
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: linear-gradient(180deg, rgba(25,25,32,.96), rgba(12,12,16,.96));
-      box-shadow: 0 30px 90px rgba(0,0,0,.65);
       overflow:hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow: 0 22px 70px rgba(0,0,0,.70);
     }
     .modalTop{
+      padding: 12px 14px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:12px;
-      padding: 12px 14px;
+      gap:10px;
+      background: rgba(0,0,0,.25);
       border-bottom: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.22);
     }
     .modalTop strong{
-      font-size: 14px;
       font-weight: 950;
-      letter-spacing: .2px;
+      font-size: 14px;
+      letter-spacing:.2px;
     }
     .closeBtn{
-      border: 1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.28);
+      color: rgba(255,255,255,.92);
       padding: 8px 10px;
+      border-radius: 999px;
+      font-weight: 950;
       cursor:pointer;
-      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 12px;
     }
 
     .modalGrid{
       display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 0;
+      grid-template-columns: 1.15fr .85fr;
+      gap:0;
     }
-    .modalImg{
+    @media (max-width: 860px){
+      .modalGrid{ grid-template-columns: 1fr; }
+    }
+
+    .modalMedia{
+      position:relative;
+      background: rgba(0,0,0,.35);
+      min-height: 320px;
+    }
+    .modalMedia img{
       width:100%;
-      height: 420px;
+      height:100%;
       object-fit: cover;
       display:block;
-      background:#000;
     }
+    .imgNav{
+      position:absolute;
+      inset:auto 12px 12px 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      pointer-events:none;
+    }
+    .navBtn{
+      pointer-events:auto;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.38);
+      color: rgba(255,255,255,.92);
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-weight: 950;
+      cursor:pointer;
+      text-transform: uppercase;
+      font-size: 12px;
+      backdrop-filter: blur(6px);
+      user-select:none;
+    }
+    .imgDots{
+      pointer-events:none;
+      display:flex;
+      gap:6px;
+      justify-content:center;
+      flex:1;
+    }
+    .dot{
+      width:9px; height:9px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.25);
+      border: 1px solid rgba(255,255,255,.18);
+    }
+    .dot.on{ background: rgba(246,196,69,.95); border-color: rgba(246,196,69,.55); }
+
     .modalInfo{
-      padding: 14px 14px 16px;
+      padding: 14px;
       display:flex;
       flex-direction:column;
       gap:10px;
     }
-    .modalPrice{
-      font-size: 22px;
+    .mPrice{
       font-weight: 950;
-      letter-spacing: .2px;
+      font-size: 22px;
+      letter-spacing:.2px;
     }
-    .modalMeta{
+    .mMeta{
       color: var(--muted);
       font-size: 13px;
-      line-height: 1.4;
+      line-height:1.3;
     }
-    .modalNotes{
+    .mNotes{
+      padding-top: 8px;
       border-top: 1px solid rgba(255,255,255,.10);
-      padding-top: 10px;
-      color: rgba(255,255,255,.85);
+      color: rgba(255,255,255,.86);
       font-size: 13px;
-      line-height: 1.5;
-      white-space: pre-line;
+      line-height: 1.35;
+      min-height: 44px;
     }
-    .modalBtns{
+
+    .mBtns{
       display:flex;
       flex-direction:column;
       gap:10px;
       margin-top: 6px;
     }
-    .modalBtns .btn{
+    .mBtn{
+      text-decoration:none;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      border-radius: 14px;
+      padding: 14px 14px;
+      font-weight: 950;
+      letter-spacing: .2px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
       text-transform: uppercase;
       font-size: 13px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .mBtn.call{
+      background: linear-gradient(180deg, rgba(226,43,43,.98), rgba(179,25,25,.98));
+      border-color: rgba(226,43,43,.55);
+    }
+    .mBtn.fin-en{
+      background: linear-gradient(180deg, rgba(24,184,146,.96), rgba(14,140,110,.96));
+      border-color: rgba(24,184,146,.55);
+    }
+    .mBtn.fin-es{
+      background: linear-gradient(180deg, rgba(246,196,69,.98), rgba(214,156,36,.98));
+      color:#121218;
+      border-color: rgba(246,196,69,.65);
     }
 
-    /* responsive */
+    /* Smooth anchor */
+    html{ scroll-behavior:smooth; }
+
     @media (max-width: 920px){
       .hero{ grid-template-columns: 1fr; }
       .media{ min-height: 280px; }
       .headline{ font-size: 32px; }
-      .invGrid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .modalGrid{ grid-template-columns: 1fr; }
-      .modalImg{ height: 320px; }
     }
     @media (max-width: 520px){
       .headline{ font-size: 28px; }
       .logoBox{ width:58px; height:58px; }
       .btn{ padding: 14px 12px; }
       .big{ font-size: 24px; }
-      .invGrid{ grid-template-columns: 1fr; }
-      .invImg{ height: 180px; }
+      .modalMedia{ min-height: 240px; }
     }
   </style>
 </head>
@@ -645,7 +797,6 @@
             💬 Text Us
           </a>
 
-          <!-- Inventory button -->
           <a class="btn text" href="#inventory" aria-label="View full inventory">
             🚗 View Full Inventory
           </a>
@@ -687,156 +838,300 @@
         </div>
       </aside>
     </div>
-
-    <div class="footnote">
-      By submitting a credit application you consent to be contacted. This site is for quick approvals & inventory inquiries.
-    </div>
   </div>
 
   <!-- ===================== INVENTORY SECTION ===================== -->
-  <section id="inventory" class="inventory" aria-label="Full inventory">
-    <div class="invWrap">
-      <div class="invHead">
-        <div>
+  <section id="inventory" class="inventory" aria-label="Full Inventory">
+    <div class="invShell">
+      <div class="invTop">
+        <div class="invTitle">
           <h2>Full Inventory</h2>
-          <p>Tap a vehicle to view full details, price, and instantly text an inquiry to (501) 697-5206.</p>
+          <p>Tap a vehicle to view details, pricing, and instantly text an inquiry to (501) 697-5206.</p>
         </div>
-        <div class="invCount" id="invCount">Loading…</div>
+
+        <div class="filters">
+          <div id="invCount" class="invCount">0 Vehicles Available</div>
+          <button class="fbtn active" data-filter="ALL">All</button>
+          <button class="fbtn" data-filter="TRUCK">Trucks</button>
+          <button class="fbtn" data-filter="SUV">SUVs</button>
+          <button class="fbtn" data-filter="CAR">Cars</button>
+        </div>
       </div>
 
       <div id="invGrid" class="invGrid"></div>
     </div>
   </section>
 
-  <!-- ===================== DETAILS MODAL ===================== -->
-  <div class="modal" id="modal" aria-hidden="true">
-    <div class="modalCard" role="dialog" aria-modal="true" aria-label="Vehicle details">
+  <!-- ===================== MODAL ===================== -->
+  <div id="modalBackdrop" class="modalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Vehicle details">
       <div class="modalTop">
-        <strong id="mTitle">Vehicle Details</strong>
-        <button class="closeBtn" id="mClose" aria-label="Close">✕ Close</button>
+        <strong id="mTitle">Vehicle</strong>
+        <button id="mClose" class="closeBtn">✖ Close</button>
       </div>
 
       <div class="modalGrid">
-        <img class="modalImg" id="mImg" src="" alt="Vehicle photo">
-        <div class="modalInfo">
-          <div class="modalPrice" id="mPrice">$—</div>
-          <div class="modalMeta" id="mMeta">—</div>
-          <div class="modalNotes" id="mNotes"></div>
+        <div class="modalMedia">
+          <img id="mImg" src="" alt="Vehicle photo">
+          <div class="imgNav">
+            <button id="mPrev" class="navBtn">◀ Prev</button>
+            <div id="mDots" class="imgDots"></div>
+            <button id="mNext" class="navBtn">Next ▶</button>
+          </div>
+        </div>
 
-          <div class="modalBtns">
-            <a class="btn text" id="mText" href="#">💬 Text Inquiry About This Vehicle</a>
-            <a class="btn call" id="mCall" href="#">📞 Call Now</a>
+        <div class="modalInfo">
+          <div class="mPrice" id="mPrice">$0</div>
+          <div class="mMeta" id="mMeta">—</div>
+          <div class="mNotes" id="mNotes">—</div>
+
+          <div class="mBtns">
+            <a id="mText" class="mBtn" href="#" rel="noopener">💬 Text Inquiry About This Vehicle</a>
+            <a id="mCall" class="mBtn call" href="#">📞 Call Now</a>
+            <a id="mFinEn" class="mBtn fin-en" href="#" target="_blank" rel="noopener">🧾 Apply for Financing (English)</a>
+            <a id="mFinEs" class="mBtn fin-es" href="#" target="_blank" rel="noopener">🇲🇽 Aplicar para Financiamiento (Español)</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-<script>
-  const PHONE = "15016975206";
+  <div class="footnote">
+    By submitting a credit application you consent to be contacted. This site is for quick approvals & inventory inquiries.
+  </div>
 
-  // ✅ EDIT THIS LIST to add vehicles
-  // Tip: keep images as filenames you upload into the repo (same folder as index.html)
+<script>
+  // ===================== SETTINGS =====================
+  const PHONE = "15016975206";
+  const FIN_EN = "https://finishlinemotorsports.startyourcreditapproval.com";
+  const FIN_ES = "https://finishlinemotorsports.startyourcreditapproval.com?lang=es";
+
+  // ===================== INVENTORY DATA =====================
+  // Add more vehicles by copying one block and changing the fields.
+  // category: "TRUCK" | "SUV" | "CAR"
+  // badges: use any words (example: "CLEAN TITLE", "4WD", "NEW ARRIVAL")
   const INVENTORY = [
     {
+      id: "yukon2015",
       title: "2015 GMC Yukon Denali 4WD",
+      category: "SUV",
       price: 15500,
       miles: 140000,
       color: "Charcoal Gray",
       notes: "Clean title • Loaded Denali • Cold A/C",
-      image: "copy_F2251ACB-8CC9-4351-8B84-317F70E3A30F.JPEG"
+      badges: ["CLEAN TITLE", "4WD", "DENALI"],
+      images: [
+        "copy_F2251ACB-8CC9-4351-8B84-317F70E3A30F.JPEG"
+        // Add more images here if you upload them:
+        // "yukon2.jpg",
+        // "yukon3.jpg"
+      ]
     }
+
+    // مثال / Example:
+    // {
+    //   id:"silverado2011",
+    //   title:"2011 Chevrolet Silverado 1500 LT",
+    //   category:"TRUCK",
+    //   price:7500,
+    //   miles:228823,
+    //   color:"Black",
+    //   notes:"Runs & drives great • Clean title • Cold A/C",
+    //   badges:["TRUCK","CLEAN TITLE","NEW ARRIVAL"],
+    //   images:["silverado1.jpg","silverado2.jpg"]
+    // }
   ];
 
+  // ===================== HELPERS =====================
   const money = n => "$" + Number(n).toLocaleString();
+  const milesFmt = n => Number(n).toLocaleString() + " miles";
 
-  function smsLink(msg){
+  function smsLink(message){
     const ios = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    return `sms:${PHONE}${ios ? "&body=" : "?body="}${encodeURIComponent(msg)}`;
+    return `sms:${PHONE}${ios ? "&body=" : "?body="}${encodeURIComponent(message)}`;
   }
 
-  function inquiryMsg(v){
-    return `Hi Finish Line Motorsports, I'm interested in the ${v.title} listed for ${money(v.price)}. Is it available?`;
+  function badgeTone(text){
+    const t = String(text).toUpperCase();
+    if (t.includes("NEW")) return "red";
+    if (t.includes("CLEAN") || t.includes("4WD") || t.includes("AWD")) return "green";
+    if (t.includes("DENALI") || t.includes("LTZ") || t.includes("Z71")) return "yellow";
+    return "";
   }
 
-  function openModal(v){
-    const modal = document.getElementById("modal");
-    const title = document.getElementById("mTitle");
-    const img = document.getElementById("mImg");
-    const price = document.getElementById("mPrice");
-    const meta = document.getElementById("mMeta");
-    const notes = document.getElementById("mNotes");
-    const textBtn = document.getElementById("mText");
-    const callBtn = document.getElementById("mCall");
+  // ===================== RENDER INVENTORY =====================
+  let activeFilter = "ALL";
 
-    title.textContent = v.title;
-    img.src = v.image;
-    img.alt = v.title;
-    price.textContent = money(v.price);
-    meta.textContent = `${v.color} • ${Number(v.miles).toLocaleString()} miles`;
-    notes.textContent = v.notes ? v.notes : "";
+  function getFiltered(){
+    if (activeFilter === "ALL") return INVENTORY;
+    return INVENTORY.filter(v => v.category === activeFilter);
+  }
 
-    textBtn.href = smsLink(inquiryMsg(v));
-    callBtn.href = `tel:+${PHONE}`;
+  function updateCount(n){
+    const el = document.getElementById("invCount");
+    if (!el) return;
+    el.textContent = `${n} Vehicle${n === 1 ? "" : "s"} Available`;
+  }
 
-    modal.classList.add("show");
-    modal.setAttribute("aria-hidden", "false");
+  function renderInventory(){
+    const grid = document.getElementById("invGrid");
+    if (!grid) return;
+
+    const list = getFiltered();
+    updateCount(list.length);
+
+    grid.innerHTML = list.map(v => {
+      const img = (v.images && v.images.length) ? v.images[0] : "";
+      const badgeHtml = (v.badges || []).slice(0,3).map(b => {
+        const tone = badgeTone(b);
+        return `<div class="badge ${tone}">${b}</div>`;
+      }).join("");
+
+      return `
+        <div class="invCard" role="button" tabindex="0" data-id="${v.id}" aria-label="View details for ${v.title}">
+          <div class="invMedia">
+            <img src="${img}" alt="${v.title}">
+            <div class="badgeRow">${badgeHtml}</div>
+          </div>
+          <div class="invBody">
+            <p class="invName">${v.title}</p>
+            <p class="invMeta">${v.color} • ${milesFmt(v.miles)}</p>
+            <div class="invPriceRow">
+              <div class="invPrice">${money(v.price)}</div>
+              <div class="invCtaMini">Tap for details</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    // click handlers
+    grid.querySelectorAll(".invCard").forEach(card => {
+      card.addEventListener("click", () => openVehicle(card.dataset.id));
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") openVehicle(card.dataset.id);
+      });
+    });
+  }
+
+  // ===================== MODAL LOGIC (multi-photo) =====================
+  const backdrop = document.getElementById("modalBackdrop");
+  const mTitle = document.getElementById("mTitle");
+  const mImg = document.getElementById("mImg");
+  const mDots = document.getElementById("mDots");
+  const mPrice = document.getElementById("mPrice");
+  const mMeta = document.getElementById("mMeta");
+  const mNotes = document.getElementById("mNotes");
+  const mText = document.getElementById("mText");
+  const mCall = document.getElementById("mCall");
+  const mFinEn = document.getElementById("mFinEn");
+  const mFinEs = document.getElementById("mFinEs");
+  const mPrev = document.getElementById("mPrev");
+  const mNext = document.getElementById("mNext");
+  const mClose = document.getElementById("mClose");
+
+  let currentVehicle = null;
+  let imgIndex = 0;
+
+  function setDots(total, on){
+    if (!mDots) return;
+    mDots.innerHTML = "";
+    for (let i=0; i<total; i++){
+      const d = document.createElement("div");
+      d.className = "dot" + (i === on ? " on" : "");
+      mDots.appendChild(d);
+    }
+  }
+
+  function showImage(index){
+    if (!currentVehicle) return;
+    const imgs = currentVehicle.images || [];
+    if (!imgs.length) return;
+
+    imgIndex = (index + imgs.length) % imgs.length;
+    mImg.src = imgs[imgIndex];
+    setDots(imgs.length, imgIndex);
+
+    // hide nav buttons if only 1 image
+    const many = imgs.length > 1;
+    mPrev.style.display = many ? "inline-flex" : "none";
+    mNext.style.display = many ? "inline-flex" : "none";
+    mDots.style.display = many ? "flex" : "none";
+  }
+
+  function openVehicle(id){
+    const v = INVENTORY.find(x => x.id === id);
+    if (!v) return;
+
+    currentVehicle = v;
+    imgIndex = 0;
+
+    mTitle.textContent = v.title;
+    mPrice.textContent = money(v.price);
+    mMeta.textContent = `${v.color} • ${milesFmt(v.miles)}`;
+    mNotes.textContent = v.notes || "—";
+
+    const msg = `Hi Finish Line Motorsports, I'm interested in the ${v.title} listed for ${money(v.price)}. Is it available?`;
+    mText.href = smsLink(msg);
+    mCall.href = `tel:+${PHONE}`;
+    mFinEn.href = FIN_EN;
+    mFinEs.href = FIN_ES;
+
+    showImage(0);
+
+    backdrop.classList.add("show");
+    backdrop.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
   }
 
   function closeModal(){
-    const modal = document.getElementById("modal");
-    modal.classList.remove("show");
-    modal.setAttribute("aria-hidden", "true");
+    backdrop.classList.remove("show");
+    backdrop.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    currentVehicle = null;
+  }
+
+  mClose.addEventListener("click", closeModal);
+  backdrop.addEventListener("click", (e) => {
+    if (e.target === backdrop) closeModal();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (!backdrop.classList.contains("show")) return;
+    if (e.key === "Escape") closeModal();
+    if (e.key === "ArrowLeft") showImage(imgIndex - 1);
+    if (e.key === "ArrowRight") showImage(imgIndex + 1);
+  });
+
+  mPrev.addEventListener("click", (e) => { e.preventDefault(); showImage(imgIndex - 1); });
+  mNext.addEventListener("click", (e) => { e.preventDefault(); showImage(imgIndex + 1); });
+
+  // basic swipe (mobile)
+  let touchStartX = 0;
+  let touchEndX = 0;
+  mImg.addEventListener("touchstart", (e)=>{ touchStartX = e.changedTouches[0].screenX; }, {passive:true});
+  mImg.addEventListener("touchend", (e)=>{
+    touchEndX = e.changedTouches[0].screenX;
+    const dx = touchEndX - touchStartX;
+    if (Math.abs(dx) < 40) return;
+    if (dx > 0) showImage(imgIndex - 1);
+    else showImage(imgIndex + 1);
+  }, {passive:true});
+
+  // ===================== FILTER BUTTONS =====================
+  function setActiveFilter(filter){
+    activeFilter = filter;
+    document.querySelectorAll(".fbtn").forEach(b => {
+      b.classList.toggle("active", b.dataset.filter === filter);
+    });
+    renderInventory();
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    // Inventory render
-    const grid = document.getElementById("invGrid");
-    const count = document.getElementById("invCount");
-
-    if (count) count.textContent = `${INVENTORY.length} Vehicle${INVENTORY.length === 1 ? "" : "s"}`;
-
-    if (!grid) return;
-
-    grid.innerHTML = INVENTORY.map((v, idx) => `
-      <div class="invCard" role="button" tabindex="0" data-idx="${idx}" aria-label="View details for ${v.title}">
-        <img class="invImg" src="${v.image}" alt="${v.title}">
-        <div class="invBody">
-          <div class="invTitle">${v.title}</div>
-          <div class="invMeta">${v.color} • ${Number(v.miles).toLocaleString()} miles</div>
-          <div class="invPriceRow">
-            <div class="invPrice">${money(v.price)}</div>
-            <div class="invPill">Tap for details</div>
-          </div>
-        </div>
-      </div>
-    `).join("");
-
-    // Click & keyboard open
-    grid.addEventListener("click", (e) => {
-      const card = e.target.closest(".invCard");
-      if (!card) return;
-      const idx = Number(card.getAttribute("data-idx"));
-      openModal(INVENTORY[idx]);
+    document.querySelectorAll(".fbtn").forEach(btn => {
+      btn.addEventListener("click", () => setActiveFilter(btn.dataset.filter));
     });
-
-    grid.addEventListener("keydown", (e) => {
-      if (e.key !== "Enter" && e.key !== " ") return;
-      const card = e.target.closest(".invCard");
-      if (!card) return;
-      e.preventDefault();
-      const idx = Number(card.getAttribute("data-idx"));
-      openModal(INVENTORY[idx]);
-    });
-
-    // Modal close handlers
-    document.getElementById("mClose")?.addEventListener("click", closeModal);
-    document.getElementById("modal")?.addEventListener("click", (e) => {
-      if (e.target.id === "modal") closeModal(); // click outside card
-    });
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeModal();
-    });
+    renderInventory();
   });
 </script>
 

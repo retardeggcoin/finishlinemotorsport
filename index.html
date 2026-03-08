@@ -1058,9 +1058,48 @@
   function splitList(v){
     return String(v || "").split(",").map(s => s.trim()).filter(Boolean);
   }
+
   function toNum(v){
     const n = String(v || "").replace(/[^\d.]/g, "");
     return n ? Number(n) : 0;
+  }
+
+  function csvSafeCell(row, index){
+    return index >= 0 && index < row.length ? String(row[index] || "").trim() : "";
+  }
+
+  function isDropboxFolderLink(url){
+    return /dropbox\.com\/scl\/fo\//i.test(String(url || ""));
+  }
+
+  function isDropboxDirectFile(url){
+    return /dropbox\.com|dropboxusercontent\.com/i.test(String(url || "")) && /\.(jpg|jpeg|png|webp|gif)(\?|$)/i.test(String(url || ""));
+  }
+
+  function normalizeDropboxImage(url){
+    if (!url) return "";
+    let out = String(url).trim();
+
+    if (/dropboxusercontent\.com/i.test(out)) return out;
+
+    // remove dl=0 / dl=1 and replace with raw=1
+    out = out.replace(/[?&]dl=0/gi, "").replace(/[?&]dl=1/gi, "");
+    if (/dropbox\.com/i.test(out)){
+      out += (out.includes("?") ? "&" : "?") + "raw=1";
+    }
+    return out;
+  }
+
+  function uniqueUrls(list){
+    const seen = new Set();
+    const out = [];
+    for (const item of list){
+      const key = item.trim();
+      if (!key || seen.has(key)) continue;
+      seen.add(key);
+      out.push(key);
+    }
+    return out;
   }
 
   // CSV parser (handles quoted commas)
@@ -1096,6 +1135,75 @@
     return rows;
   }
 
+  // ===================== DROPBOX FOLDER SUPPORT =====================
+  // Best-effort parsing of a public Dropbox shared folder page.
+  // This depends on Dropbox page structure and may need adjustment later.
+  async function loadDropboxFolderImages(folderUrl){
+    try{
+      const cleanUrl = String(folderUrl).trim();
+      const proxied = "https://api.allorigins.win/raw?url=" + encodeURIComponent(cleanUrl);
+      const res = await fetch(proxied, { cache: "no-store" });
+      if (!res.ok) throw new Error("Proxy fetch failed: " + res.status);
+
+      const html = await res.text();
+      const found = [];
+
+      // Look for direct image URLs inside page source
+      const patterns = [
+        /https:\/\/[^"'\\\s]+?\.(?:jpg|jpeg|png|webp|gif)(?:\?[^"'\\\s]*)?/gi,
+        /https:\\\/\\\/[^"'\\\s]+?\.(?:jpg|jpeg|png|webp|gif)(?:\?[^"'\\\s]*)?/gi
+      ];
+
+      for (const pattern of patterns){
+        const matches = html.match(pattern) || [];
+        for (let u of matches){
+          u = u.replace(/\\\//g, "/");
+          if (/dropbox/i.test(u) || /dropboxusercontent/i.test(u)){
+            found.push(normalizeDropboxImage(u));
+          } else {
+            found.push(u);
+          }
+        }
+      }
+
+      // Sometimes Dropbox page includes encoded file paths
+      const extra = [];
+      const quotedImageNames = html.match(/[^"'\\\s]+\.(?:jpg|jpeg|png|webp|gif)/gi) || [];
+      for (const name of quotedImageNames){
+        if (!/^https?:/i.test(name)) extra.push(name);
+      }
+
+      // If folder page includes direct file hrefs, keep only image files
+      const finalImages = uniqueUrls(found).filter(u => /\.(jpg|jpeg|png|webp|gif)(\?|$)/i.test(u));
+
+      return finalImages;
+    }catch(err){
+      console.warn("Dropbox folder read failed:", err);
+      return [];
+    }
+  }
+
+  async function resolvePhotoCell(value){
+    const raw = String(value || "").trim();
+    if (!raw) return [];
+
+    const parts = splitList(raw);
+    let finalImages = [];
+
+    for (const part of parts){
+      if (isDropboxFolderLink(part)){
+        const folderImages = await loadDropboxFolderImages(part);
+        finalImages.push(...folderImages);
+      } else if (isDropboxDirectFile(part)){
+        finalImages.push(normalizeDropboxImage(part));
+      } else {
+        finalImages.push(part);
+      }
+    }
+
+    return uniqueUrls(finalImages);
+  }
+
   async function loadInventoryFromSheet(){
     const url = SHEET_CSV_URL + (SHEET_CSV_URL.includes("?") ? "&" : "?") + "v=" + Date.now();
     const res = await fetch(url, { cache: "no-store" });
@@ -1106,24 +1214,34 @@
     const header = rows.shift().map(h => String(h).trim().toLowerCase());
     const idx = (name) => header.indexOf(name);
 
-    INVENTORY = rows
-      .filter(r => r.some(cell => String(cell).trim() !== ""))
-      .map(r => ({
-        id: (r[idx("id")] || "").trim() || ("v" + Math.random().toString(16).slice(2)),
-        title: (r[idx("title")] || "").trim(),
-        category: (r[idx("category")] || "CAR").trim().toUpperCase(),
-        price: toNum(r[idx("price")]),
-        miles: toNum(r[idx("miles")]),
-        color: (r[idx("color")] || "").trim(),
-        drivetrain: (r[idx("drivetrain")] || "").trim(),
-        cab: (r[idx("cab")] || "").trim(),
-        title_status: (r[idx("title_status")] || "").trim(),
-        notes: (r[idx("notes")] || "").trim(),
-        badges: splitList(r[idx("badges")]),
-        images: splitList(r[idx("photos")]),
-        video: (r[idx("video")] || "").trim(),
-      }))
-      .filter(v => v.title);
+    const items = [];
+
+    for (const r of rows){
+      if (!r.some(cell => String(cell).trim() !== "")) continue;
+
+      const rawPhotos = csvSafeCell(r, idx("photos"));
+      const rawVideo = csvSafeCell(r, idx("video"));
+
+      const item = {
+        id: csvSafeCell(r, idx("id")) || ("v" + Math.random().toString(16).slice(2)),
+        title: csvSafeCell(r, idx("title")),
+        category: (csvSafeCell(r, idx("category")) || "CAR").toUpperCase(),
+        price: toNum(csvSafeCell(r, idx("price"))),
+        miles: toNum(csvSafeCell(r, idx("miles"))),
+        color: csvSafeCell(r, idx("color")),
+        drivetrain: csvSafeCell(r, idx("drivetrain")),
+        cab: csvSafeCell(r, idx("cab")),
+        title_status: csvSafeCell(r, idx("title_status")),
+        notes: csvSafeCell(r, idx("notes")),
+        badges: splitList(csvSafeCell(r, idx("badges"))),
+        images: await resolvePhotoCell(rawPhotos),
+        video: rawVideo
+      };
+
+      if (item.title) items.push(item);
+    }
+
+    INVENTORY = items;
   }
 
   function getFiltered(){
@@ -1153,7 +1271,7 @@
     }
 
     grid.innerHTML = list.map(v => {
-      const img = (v.images && v.images.length) ? v.images[0] : "";
+      const img = (v.images && v.images.length) ? v.images[0] : "https://via.placeholder.com/1400x788?text=No+Photo";
       const badgeHtml = (v.badges || []).slice(0,3).map(b => {
         const tone = badgeTone(b);
         return `<div class="badge ${tone}">${b}</div>`;
@@ -1251,6 +1369,18 @@
     const m = url.match(/\/file\/d\/([^/]+)/);
     return m ? `https://drive.google.com/file/d/${m[1]}/preview` : url;
   }
+  function isDropbox(url){ return /dropbox\.com|dropboxusercontent\.com/i.test(url); }
+
+  function normalizeDropboxVideo(url){
+    if (!url) return "";
+    let out = String(url).trim();
+    if (/dropboxusercontent\.com/i.test(out)) return out;
+    out = out.replace(/[?&]dl=0/gi, "").replace(/[?&]dl=1/gi, "");
+    if (/dropbox\.com/i.test(out)){
+      out += (out.includes("?") ? "&" : "?") + "raw=1";
+    }
+    return out;
+  }
 
   function showPhotosTab(){
     tabPhotos.classList.add("active");
@@ -1292,7 +1422,15 @@
     mFinEn.href = FIN_EN;
     mFinEs.href = FIN_ES;
 
-    showImage(0);
+    if ((v.images || []).length){
+      showImage(0);
+    } else {
+      mImg.src = "https://via.placeholder.com/1400x788?text=No+Photos+Yet";
+      setDots(0, 0);
+      mPrev.style.display = "none";
+      mNext.style.display = "none";
+      mDots.style.display = "none";
+    }
 
     const vurl = (v.video || "").trim();
     videoOpen.href = vurl || "#";
@@ -1318,8 +1456,10 @@
       } else if (isDrive(vurl)){
         mIframe.src = driveEmbed(vurl);
         mIframe.style.display = "block";
+      } else if (isDropbox(vurl)) {
+        mVideo.src = normalizeDropboxVideo(vurl);
+        mVideo.style.display = "block";
       } else {
-        // Dropbox raw=1 mp4 is best here
         mVideo.src = vurl;
         mVideo.style.display = "block";
       }
@@ -1397,14 +1537,13 @@
         drivetrain:"",
         cab:"",
         title_status:"",
-        notes:"Your site is live. Add rows in the Google Sheet with photos + optional video links. Then refresh this page.",
+        notes:"Your site is live. Add rows in the Google Sheet. In the photos column, you can now paste either direct image links OR one Dropbox folder link. Then refresh this page.",
         badges:["CONNECTED"],
         images:["https://via.placeholder.com/1400x788?text=Add+Inventory+in+Google+Sheet"],
         video:""
       }];
     }
 
-    // counts
     const msg = `${INVENTORY.length} Vehicle${INVENTORY.length === 1 ? "" : "s"}`;
     const top = document.getElementById("invCountTop");
     if (top) top.textContent = msg;

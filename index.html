@@ -1,407 +1,1637 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Finish Line Motorsports | Hot Springs, AR</title>
+  <meta name="description" content="Used Cars, Trucks & SUVs in Hot Springs, AR. Easy financing. Se habla español. Call/Text 501-697-5206." />
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root{
+      --bg:#0b0c10;
+      --panel:#0f1118;
+      --card:rgba(15,17,24,.72);
+      --card2:rgba(15,17,24,.85);
+      --text:#f5f7fb;
+      --muted:rgba(245,247,251,.72);
+      --line:rgba(255,255,255,.10);
+      --shadow: 0 24px 70px rgba(0,0,0,.60);
+      --radius: 18px;
+      --red:#e22b2b;
+      --red2:#b31919;
+      --green:#18b892;
+      --gold:#f6c445;
+      --max: 1200px;
+    }
 
-<title>Finish Line Motorsports</title>
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background: radial-gradient(1100px 700px at 10% 10%, rgba(226,43,43,.12), transparent 60%),
+                  radial-gradient(1100px 700px at 90% 10%, rgba(24,184,146,.10), transparent 60%),
+                  linear-gradient(180deg, #0a0b10, #07070b);
+      overflow-x:hidden;
+      -webkit-text-size-adjust:100%;
+    }
 
-<style>
+    a{ color:inherit; text-decoration:none; }
+    img{ max-width:100%; }
 
-body{
-font-family:Arial,Helvetica,sans-serif;
-background:#0b0c10;
-color:white;
-margin:0;
-}
+    /* ====== NAV ====== */
+    .navWrap{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background: rgba(9,10,14,.70);
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .nav{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 12px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+      flex:1 1 auto;
+    }
+    .logo{
+      width:44px; height:44px;
+      border-radius: 12px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      overflow:hidden;
+      display:flex; align-items:center; justify-content:center;
+      flex: 0 0 auto;
+    }
+    .logo img{ width:100%; height:100%; object-fit:contain; padding:5px; }
+    .brandTxt{
+      min-width:0;
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+    .brandTxt b{
+      font-weight: 950;
+      letter-spacing:.7px;
+      text-transform: uppercase;
+      font-size: 13px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .brandTxt span{
+      color: var(--muted);
+      font-size: 12px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .navLinks{
+      display:flex;
+      gap:16px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .navLinks a{
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing:.35px;
+      font-size: 12px;
+      color: rgba(245,247,251,.86);
+      opacity:.92;
+    }
+    .navLinks a:hover{ opacity:1; }
+    .navCtas{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      font-weight: 950;
+      font-size: 12px;
+      letter-spacing:.25px;
+      text-transform: uppercase;
+      transition: transform .12s ease, filter .12s ease;
+      min-height: 42px;
+    }
+    .pill:hover{ transform: translateY(-1px); filter: brightness(1.07); }
+    .pill.red{
+      background: linear-gradient(180deg, rgba(226,43,43,.95), rgba(179,25,25,.95));
+      border-color: rgba(226,43,43,.55);
+    }
+    .pill.green{
+      background: linear-gradient(180deg, rgba(24,184,146,.95), rgba(14,140,110,.95));
+      border-color: rgba(24,184,146,.55);
+    }
 
-.section{
-padding:40px 20px;
-max-width:1100px;
-margin:auto;
-}
+    /* ====== HERO ====== */
+    .hero{
+      position:relative;
+      min-height: 72vh;
+      display:flex;
+      align-items:stretch;
+      justify-content:center;
+      overflow:hidden;
+    }
+    .heroMedia{
+      position:absolute;
+      inset:0;
+      background: #0b0b0f;
+    }
+    .heroMedia img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      filter: contrast(1.05) saturate(1.05);
+      transform: scale(1.03);
+      display:block;
+    }
+    .heroMedia:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.55) 46%, rgba(0,0,0,.35) 100%),
+        linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.70));
+    }
 
-h2{
-margin-bottom:10px;
-}
+    .heroInner{
+      position:relative;
+      z-index:1;
+      width:100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 60px 16px 42px;
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 18px;
+      align-items: end;
+    }
 
-button{
-cursor:pointer;
-}
+    .heroLeft{
+      padding: 18px 0;
+    }
+    .kickerRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom: 14px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.30);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing:.35px;
+      font-size: 12px;
+      color: rgba(245,247,251,.92);
+    }
+    .dot{
+      width:9px; height:9px; border-radius:999px;
+      background: var(--red);
+      box-shadow: 0 0 16px rgba(226,43,43,.55);
+    }
+    .dot.green{ background: var(--green); box-shadow: 0 0 16px rgba(24,184,146,.50); }
+    .dot.gold{ background: var(--gold); box-shadow: 0 0 16px rgba(246,196,69,.50); }
 
-.btn{
-background:#e22b2b;
-color:white;
-border:none;
-padding:12px 16px;
-border-radius:10px;
-font-weight:bold;
-}
+    .heroLeft h1{
+      margin:0 0 12px;
+      font-weight: 980;
+      letter-spacing:-.9px;
+      line-height:1.02;
+      font-size: clamp(34px, 5vw, 56px);
+      text-transform:none;
+    }
+    .heroLeft p{
+      margin:0 0 18px;
+      color: rgba(245,247,251,.78);
+      font-size: 15px;
+      line-height: 1.5;
+      max-width: 58ch;
+    }
 
-.card{
-background:#111;
-border-radius:12px;
-padding:15px;
-}
+    .heroBtns{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      border-radius: 14px;
+      padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing:.25px;
+      font-size: 13px;
+      transition: transform .12s ease, filter .12s ease;
+      cursor:pointer;
+      user-select:none;
+      min-height: 48px;
+      text-align:center;
+    }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.08); }
+    .btn:active{ transform: translateY(0px); filter: brightness(1.00); }
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(226,43,43,.95), rgba(179,25,25,.95));
+      border-color: rgba(226,43,43,.55);
+    }
+    .btn.secondary{
+      background: linear-gradient(180deg, rgba(24,184,146,.95), rgba(14,140,110,.95));
+      border-color: rgba(24,184,146,.55);
+    }
+    .btn.ghost{
+      background: rgba(0,0,0,.28);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
 
-.invGrid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:15px;
-}
+    .heroRight{
+      display:flex;
+      justify-content:flex-end;
+    }
+    .heroCard{
+      width: min(460px, 100%);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(15,17,24,.70);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .heroCardTop{
+      padding: 14px 14px 12px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .heroCardTop b{
+      font-weight: 980;
+      letter-spacing:.25px;
+      text-transform: uppercase;
+      font-size: 12px;
+      opacity:.92;
+    }
+    .heroCardTop span{
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .heroCardBody{
+      padding: 14px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .miniRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .mini{
+      flex:1;
+      min-width: 160px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.25);
+      padding: 10px 12px;
+      color: rgba(245,247,251,.90);
+      font-weight: 900;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing:.3px;
+    }
+    .mini small{
+      display:block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-weight: 700;
+      text-transform:none;
+      letter-spacing:0;
+      font-size: 12px;
+    }
+    .heroCardCtas{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top: 4px;
+    }
+    .heroCardCtas a{ width:100%; }
 
-.invCard{
-background:#111;
-border-radius:12px;
-overflow:hidden;
-cursor:pointer;
-}
+    /* ====== SECTIONS ====== */
+    .section{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 38px 16px;
+    }
+    .sectionHeader{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom: 14px;
+    }
+    .sectionHeader h2{
+      margin:0;
+      font-size: 18px;
+      font-weight: 980;
+      letter-spacing:.2px;
+      text-transform: uppercase;
+    }
+    .sectionHeader p{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
+    }
 
-.invCard img{
-width:100%;
-height:200px;
-object-fit:cover;
-}
+    /* ====== INVENTORY ====== */
+    .invShell{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(15,17,24,.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .invTop{
+      padding: 14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      background: rgba(0,0,0,.22);
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+    .invCount{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.28);
+      border: 1px solid rgba(255,255,255,.12);
+      font-weight: 950;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing:.3px;
+      color: rgba(255,255,255,.92);
+      white-space:nowrap;
+    }
+    .filters{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .fbtn{
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.25);
+      color: rgba(255,255,255,.92);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing:.25px;
+      text-transform: uppercase;
+      cursor:pointer;
+      user-select:none;
+      transition: filter .12s ease, transform .12s ease;
+      min-height: 40px;
+    }
+    .fbtn:hover{ filter: brightness(1.08); transform: translateY(-1px); }
+    .fbtn.active{
+      background: linear-gradient(180deg, rgba(226,43,43,.28), rgba(226,43,43,.12));
+      border-color: rgba(226,43,43,.55);
+      box-shadow: 0 0 18px rgba(226,43,43,.16);
+    }
 
-.invBody{
-padding:10px;
-}
+    .invGrid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 14px;
+      padding: 14px;
+    }
+    @media (max-width: 980px){ .invGrid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (max-width: 620px){ .invGrid{ grid-template-columns: 1fr; } }
 
-.modalBackdrop{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.85);
-display:none;
-align-items:center;
-justify-content:center;
-z-index:9999;
-}
+    .invCard{
+      border-radius: 16px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.25);
+      display:flex;
+      flex-direction:column;
+      cursor:pointer;
+      transition: transform .12s ease, filter .12s ease;
+      min-height: 100%;
+    }
+    .invCard:hover{ transform: translateY(-2px); filter: brightness(1.05); }
 
-.modalBackdrop.show{
-display:flex;
-}
+    .invMedia{
+      position:relative;
+      aspect-ratio: 16 / 9;
+      overflow:hidden;
+      background: rgba(255,255,255,.05);
+    }
+    .invMedia img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+      transform: scale(1.02);
+      filter: contrast(1.05) saturate(1.02);
+      background: rgba(255,255,255,.04);
+    }
 
-.modal{
-background:#111;
-border-radius:12px;
-max-width:900px;
-width:95%;
-overflow:hidden;
-}
+    .badgeRow{
+      position:absolute;
+      top:10px;
+      left:10px;
+      right:10px;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      pointer-events:none;
+    }
+    .badge{
+      pointer-events:none;
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-weight: 950;
+      font-size: 11px;
+      letter-spacing:.3px;
+      text-transform: uppercase;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.45);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      color: rgba(255,255,255,.92);
+    }
+    .badge.red{ border-color: rgba(226,43,43,.55); box-shadow: 0 0 14px rgba(226,43,43,.18); }
+    .badge.green{ border-color: rgba(24,184,146,.55); box-shadow: 0 0 14px rgba(24,184,146,.16); }
+    .badge.gold{ border-color: rgba(246,196,69,.55); box-shadow: 0 0 14px rgba(246,196,69,.16); }
 
-.modalContent{
-display:grid;
-grid-template-columns:1fr 1fr;
-}
+    .invBody{
+      padding: 12px 12px 14px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      flex:1;
+    }
+    .invName{
+      font-weight: 980;
+      font-size: 14px;
+      line-height:1.2;
+      margin:0;
+    }
+    .invMeta{
+      color: var(--muted);
+      font-size: 12.5px;
+      margin:0;
+    }
+    .invPriceRow{
+      margin-top:auto;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .invPrice{
+      font-weight: 980;
+      font-size: 18px;
+      letter-spacing:.2px;
+    }
+    .invCtaMini{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      font-weight: 950;
+      text-transform: uppercase;
+      font-size: 11px;
+      color: rgba(255,255,255,.92);
+      white-space:nowrap;
+    }
 
-@media(max-width:700px){
-.modalContent{
-grid-template-columns:1fr;
-}
-}
+    /* ====== CONTACT STRIP ====== */
+    .contactStrip{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(15,17,24,.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .contactStrip b{ font-weight:980; }
+    .contactStrip span{ color: var(--muted); font-size: 13px; }
 
-.modalMedia img{
-width:100%;
-height:300px;
-object-fit:cover;
-}
+    /* ====== MODAL ====== */
+    .modalBackdrop{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.80);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 12px;
+      z-index: 9999;
+    }
+    .modalBackdrop.show{ display:flex; }
 
-.modalInfo{
-padding:15px;
-}
+    .modal{
+      width: min(1000px, 100%);
+      max-height: min(92vh, 920px);
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow: 0 22px 70px rgba(0,0,0,.70);
+      display:flex;
+      flex-direction:column;
+    }
+    .modalTop{
+      padding: 12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      background: rgba(0,0,0,.25);
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      flex: 0 0 auto;
+    }
+    .modalTop strong{
+      font-weight: 980;
+      font-size: 14px;
+      letter-spacing:.2px;
+    }
+    .closeBtn{
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.30);
+      color: rgba(255,255,255,.92);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-weight: 980;
+      cursor:pointer;
+      text-transform: uppercase;
+      font-size: 12px;
+      min-height: 40px;
+    }
+    .modalGrid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      min-height:0;
+      flex:1 1 auto;
+      overflow:hidden;
+    }
+    @media (max-width: 860px){
+      .modalGrid{ grid-template-columns: 1fr; overflow-y:auto; }
+    }
 
-form input, form textarea{
-width:100%;
-padding:12px;
-border-radius:8px;
-border:1px solid #333;
-background:#000;
-color:white;
-margin-bottom:10px;
-}
+    .modalMedia{
+      position:relative;
+      background: rgba(0,0,0,.40);
+      min-height: 340px;
+      overflow:hidden;
+    }
 
-</style>
+    .mediaTabs{
+      position:absolute;
+      top:12px;
+      left:12px;
+      display:flex;
+      gap:8px;
+      z-index:2;
+      flex-wrap:wrap;
+    }
+    .tabBtn{
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.45);
+      color: rgba(255,255,255,.92);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-weight: 980;
+      text-transform: uppercase;
+      font-size: 12px;
+      cursor:pointer;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      user-select:none;
+      min-height: 40px;
+    }
+    .tabBtn.active{
+      border-color: rgba(246,196,69,.60);
+      box-shadow: 0 0 18px rgba(246,196,69,.15);
+    }
+    .pane{ display:none; width:100%; height:100%; }
+    .pane.show{ display:block; }
 
+    /* Photos */
+    #photoPane{
+      position:relative;
+      width:100%;
+      height:100%;
+      min-height:340px;
+      background:#000;
+    }
+    #photoPane img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+      user-select:none;
+      -webkit-user-drag:none;
+      background:#111;
+    }
+    .imgNav{
+      position:absolute;
+      inset:auto 12px 12px 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      pointer-events:none;
+      z-index:2;
+    }
+    .navBtn{
+      pointer-events:auto;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.55);
+      color: rgba(255,255,255,.92);
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-weight: 980;
+      cursor:pointer;
+      text-transform: uppercase;
+      font-size: 12px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      user-select:none;
+      min-height: 42px;
+      min-width: 70px;
+    }
+    .imgDots{
+      pointer-events:none;
+      display:flex;
+      gap:6px;
+      justify-content:center;
+      flex:1;
+    }
+    .dot2{
+      width:9px; height:9px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.25);
+      border: 1px solid rgba(255,255,255,.18);
+    }
+    .dot2.on{ background: rgba(246,196,69,.95); border-color: rgba(246,196,69,.55); }
+
+    .photoOpenWrap{
+      position:absolute;
+      top:12px;
+      right:12px;
+      z-index:2;
+    }
+    .photoOpen{
+      display:none;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.55);
+      color: rgba(255,255,255,.92);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-weight: 980;
+      text-transform: uppercase;
+      font-size: 12px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      min-height: 40px;
+    }
+
+    /* Video */
+    #videoPane{
+      padding: 56px 12px 12px;
+      min-height: 340px;
+      background:#000;
+    }
+    #videoPane video, #videoPane iframe{
+      width:100%;
+      height: 380px;
+      border:0;
+      border-radius: 14px;
+      background: rgba(0,0,0,.55);
+      display:none;
+    }
+    @media (max-width: 860px){
+      #videoPane video, #videoPane iframe{ height: 240px; }
+      .modal{ max-height: 94vh; }
+      .modalMedia{ min-height: 260px; }
+      #photoPane{ min-height:260px; }
+      #videoPane{ min-height:260px; }
+    }
+    .videoHint{
+      margin-top: 10px;
+      color: rgba(255,255,255,.70);
+      font-size: 12px;
+      display:none;
+    }
+    .videoOpen{
+      display:none;
+      margin-top: 10px;
+      color: rgba(255,255,255,.92);
+      font-weight: 900;
+      text-decoration:none;
+      width: fit-content;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      padding: 10px 12px;
+      border-radius: 999px;
+      min-height: 42px;
+      align-items:center;
+    }
+
+    .modalInfo{
+      padding: 14px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      background: rgba(0,0,0,.14);
+      overflow-y:auto;
+    }
+    .mPrice{
+      font-weight: 980;
+      font-size: 22px;
+      letter-spacing:.2px;
+    }
+    .mMeta{
+      color: var(--muted);
+      font-size: 13px;
+      line-height:1.4;
+    }
+    .mNotes{
+      padding-top: 8px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.86);
+      font-size: 13px;
+      line-height: 1.5;
+      min-height: 44px;
+      white-space: pre-line;
+    }
+    .mBtns{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top: 6px;
+    }
+    .mBtn{
+      text-decoration:none;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      border-radius: 14px;
+      padding: 14px 14px;
+      font-weight: 980;
+      letter-spacing: .2px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      text-transform: uppercase;
+      font-size: 13px;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .12s ease, filter .12s ease;
+      min-height: 48px;
+      text-align:center;
+    }
+    .mBtn:hover{ transform: translateY(-1px); filter: brightness(1.08); }
+    .mBtn.call{
+      background: linear-gradient(180deg, rgba(226,43,43,.95), rgba(179,25,25,.95));
+      border-color: rgba(226,43,43,.55);
+    }
+    .mBtn.fin-en{
+      background: linear-gradient(180deg, rgba(24,184,146,.95), rgba(14,140,110,.95));
+      border-color: rgba(24,184,146,.55);
+    }
+    .mBtn.fin-es{
+      background: linear-gradient(180deg, rgba(246,196,69,.98), rgba(214,156,36,.98));
+      color:#11121a;
+      border-color: rgba(246,196,69,.65);
+    }
+
+    /* ====== FOOTER ====== */
+    footer{
+      border-top: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.25);
+      padding: 20px 16px 30px;
+      color: rgba(245,247,251,.70);
+      font-size: 12.5px;
+    }
+    .footerInner{
+      max-width: var(--max);
+      margin: 0 auto;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .footerInner b{ color: rgba(245,247,251,.88); }
+
+    @media (max-width: 900px){
+      .heroInner{
+        grid-template-columns: 1fr;
+        padding-top: 46px;
+      }
+      .heroRight{ justify-content:flex-start; }
+    }
+
+    @media (max-width: 720px){
+      .nav{
+        align-items:flex-start;
+      }
+      .navLinks{
+        width:100%;
+        justify-content:flex-start;
+        gap:12px;
+      }
+      .navCtas{
+        width:100%;
+      }
+      .navCtas .pill{
+        flex:1 1 calc(50% - 5px);
+      }
+      .hero{
+        min-height:auto;
+      }
+      .heroInner{
+        padding: 28px 16px 28px;
+      }
+      .heroBtns .btn{
+        width:100%;
+      }
+      .section{
+        padding: 28px 16px;
+      }
+      .heroCard{
+        width:100%;
+      }
+      .mini{
+        min-width:100%;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<section class="section">
+  <!-- NAV -->
+  <div class="navWrap">
+    <div class="nav">
+      <div class="brand">
+        <div class="logo">
+          <img src="E288C4E1-DDCC-4331-A991-C81C6205B4A8.PNG" alt="Finish Line Motorsports logo" loading="eager" decoding="async">
+        </div>
+        <div class="brandTxt">
+          <b>Finish Line Motorsports</b>
+          <span>Hot Springs, AR • Used Cars, Trucks & SUVs</span>
+        </div>
+      </div>
 
-<h2>Finish Line Motorsports</h2>
+      <div class="navLinks">
+        <a href="#inventory">Inventory</a>
+        <a href="#financing">Financing</a>
+        <a href="#contact">Contact</a>
+      </div>
 
-<p>
-Used Cars & Trucks  
-Hot Springs Arkansas
-</p>
+      <div class="navCtas">
+        <a class="pill" href="sms:+15016975206">💬 Text</a>
+        <a class="pill red" href="tel:+15016975206">📞 Call</a>
+      </div>
+    </div>
+  </div>
 
-</section>
+  <!-- HERO -->
+  <section class="hero" aria-label="Hero">
+    <div class="heroMedia">
+      <img src="copy_F2251ACB-8CC9-4351-8B84-317F70E3A30F.JPEG" alt="Finish Line Motorsports hero background" loading="eager" decoding="async">
+    </div>
 
+    <div class="heroInner">
+      <div class="heroLeft">
+        <div class="kickerRow">
+          <div class="chip"><span class="dot"></span> Everyone Approved</div>
+          <div class="chip"><span class="dot green"></span> Easy Financing</div>
+          <div class="chip"><span class="dot gold"></span> Se Habla Español</div>
+        </div>
 
-<section class="section">
+        <h1>Drive Home Today.</h1>
+        <p>
+          We help buyers of <b>all credit types</b> get into the right vehicle fast.
+          Browse inventory, tap a unit for full details, photos + video, and text us instantly.
+        </p>
 
-<h2>Inventory</h2>
+        <div class="heroBtns">
+          <a class="btn primary" href="#inventory">🚗 View Inventory</a>
+          <a class="btn secondary" href="#financing">🧾 Get Approved</a>
+          <a class="btn ghost" href="sms:+15016975206">💬 Text Us</a>
+        </div>
+      </div>
 
-<div id="invGrid" class="invGrid"></div>
+      <div class="heroRight">
+        <div class="heroCard" aria-label="Quick actions">
+          <div class="heroCardTop">
+            <div>
+              <b>Quick Actions</b><br />
+              <span>Tap one and we’ll get you handled.</span>
+            </div>
+            <div class="invCount" id="invCountTop">Loading…</div>
+          </div>
 
-</section>
+          <div class="heroCardBody">
+            <div class="miniRow">
+              <div class="mini">📍 Location<small>159 Weston Rd STE A, Hot Springs, AR 71913</small></div>
+              <div class="mini">📞 Phone<small>501-697-5206</small></div>
+            </div>
 
+            <div class="heroCardCtas">
+              <a class="btn primary" href="tel:+15016975206">📞 Call Now</a>
+              <a class="btn ghost" href="sms:+15016975206">💬 Text Now</a>
+              <a class="btn secondary" href="https://finishlinemotorsports.startyourcreditapproval.com" target="_blank" rel="noopener">🧾 Apply (English)</a>
+              <a class="btn" style="background:linear-gradient(180deg, rgba(246,196,69,.98), rgba(214,156,36,.98)); color:#11121a; border-color:rgba(246,196,69,.65);"
+                 href="https://finishlinemotorsports.startyourcreditapproval.com?lang=es" target="_blank" rel="noopener">🇲🇽 Aplicar (Español)</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="section">
+  <!-- INVENTORY -->
+  <section id="inventory" class="section">
+    <div class="sectionHeader">
+      <div>
+        <h2>Inventory</h2>
+        <p>Tap a vehicle to open details, photos, video, and send an instant text inquiry.</p>
+      </div>
+      <div class="filters">
+        <button class="fbtn active" data-filter="ALL">All</button>
+        <button class="fbtn" data-filter="TRUCK">Trucks</button>
+        <button class="fbtn" data-filter="SUV">SUVs</button>
+        <button class="fbtn" data-filter="CAR">Cars</button>
+      </div>
+    </div>
 
-<h2>Quick Vehicle Inquiry</h2>
+    <div class="invShell">
+      <div class="invTop">
+        <div class="invCount" id="invCount">Loading…</div>
+        <div style="color:rgba(245,247,251,.70); font-size:12.5px;">
+          Prefer texting? Tap any unit → <b>Text Inquiry</b>.
+        </div>
+      </div>
+      <div id="invGrid" class="invGrid"></div>
+    </div>
+  </section>
 
-<div class="card">
+  <!-- FINANCING -->
+  <section id="financing" class="section">
+    <div class="sectionHeader">
+      <div>
+        <h2>Financing</h2>
+        <p>Fast approvals • Easy process • All credit types welcome.</p>
+      </div>
+    </div>
 
-<form id="leadForm">
+    <div class="contactStrip">
+      <div>
+        <b>Get Approved Today</b><br />
+        <span>Start your application in English or Español. Questions? Text us anytime.</span>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="pill green" href="https://finishlinemotorsports.startyourcreditapproval.com" target="_blank" rel="noopener">🧾 Apply (English)</a>
+        <a class="pill" style="background:linear-gradient(180deg, rgba(246,196,69,.98), rgba(214,156,36,.98)); color:#11121a; border-color:rgba(246,196,69,.65);"
+           href="https://finishlinemotorsports.startyourcreditapproval.com?lang=es" target="_blank" rel="noopener">🇲🇽 Aplicar (Español)</a>
+      </div>
+    </div>
+  </section>
 
-<input type="text" id="name" placeholder="Full Name" required>
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="sectionHeader">
+      <div>
+        <h2>Contact</h2>
+        <p>Call/Text for availability, pricing, and to set an appointment.</p>
+      </div>
+    </div>
 
-<input type="tel" id="phone" placeholder="Phone Number" required>
+    <div class="contactStrip">
+      <div>
+        <b>Finish Line Motorsports</b><br />
+        <span>159 Weston Rd STE A, Hot Springs, AR 71913</span>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="pill" href="sms:+15016975206">💬 Text 501-697-5206</a>
+        <a class="pill red" href="tel:+15016975206">📞 Call 501-697-5206</a>
+        <a class="pill" href="https://www.google.com/maps/search/?api=1&query=159+Weston+Rd+STE+A+Hot+Springs+AR+71913" target="_blank" rel="noopener">📍 Open Maps</a>
+      </div>
+    </div>
+  </section>
 
-<input type="text" id="vehicle" placeholder="Vehicle Interested In">
+  <footer>
+    <div class="footerInner">
+      <div>© <b>Finish Line Motorsports</b> • Hot Springs, AR</div>
+      <div>By submitting a credit application you consent to be contacted. Inventory inquiries available by text.</div>
+    </div>
+  </footer>
 
-<textarea id="message" placeholder="Questions"></textarea>
+  <!-- MODAL -->
+  <div id="modalBackdrop" class="modalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Vehicle details">
+      <div class="modalTop">
+        <strong id="mTitle">Vehicle</strong>
+        <button id="mClose" class="closeBtn">✖ Close</button>
+      </div>
 
-<button class="btn">Send Inquiry</button>
+      <div class="modalGrid">
+        <div class="modalMedia">
+          <div class="mediaTabs">
+            <button id="tabPhotos" class="tabBtn active">Photos</button>
+            <button id="tabVideo" class="tabBtn">Video</button>
+          </div>
 
-</form>
+          <div class="photoOpenWrap">
+            <a id="photoOpen" class="photoOpen" href="#" target="_blank" rel="noopener">Open Photo</a>
+          </div>
 
-</div>
+          <div id="photoPane" class="pane show">
+            <img id="mImg" src="" alt="Vehicle photo" loading="eager" decoding="async">
+            <div class="imgNav">
+              <button id="mPrev" class="navBtn">◀ Prev</button>
+              <div id="mDots" class="imgDots"></div>
+              <button id="mNext" class="navBtn">Next ▶</button>
+            </div>
+          </div>
 
-</section>
+          <div id="videoPane" class="pane">
+            <video id="mVideo" controls playsinline webkit-playsinline preload="metadata" muted></video>
+            <iframe id="mIframe" title="Vehicle video" allowfullscreen playsinline></iframe>
+            <div id="videoHint" class="videoHint">If video doesn't load on your phone, tap the button below to open it directly.</div>
+            <a id="videoOpen" class="videoOpen" href="#" target="_blank" rel="noopener">Open Video</a>
+          </div>
+        </div>
 
+        <div class="modalInfo">
+          <div class="mPrice" id="mPrice">$0</div>
+          <div class="mMeta" id="mMeta">—</div>
+          <div class="mNotes" id="mNotes">—</div>
 
-<div id="modalBackdrop" class="modalBackdrop">
-
-<div class="modal">
-
-<div class="modalContent">
-
-<div class="modalMedia">
-
-<img id="mImg">
-
-</div>
-
-<div class="modalInfo">
-
-<h2 id="mTitle"></h2>
-
-<p id="mPrice"></p>
-
-<p id="mMeta"></p>
-
-<p id="mNotes"></p>
-
-<br>
-
-<a id="mText" class="btn">Text About Vehicle</a>
-
-<br><br>
-
-<a id="videoOpen" class="btn" target="_blank">Open Video</a>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
+          <div class="mBtns">
+            <a id="mText" class="mBtn" href="#">💬 Text Inquiry About This Vehicle</a>
+            <a id="mCall" class="mBtn call" href="#">📞 Call Now</a>
+            <a id="mFinEn" class="mBtn fin-en" href="#" target="_blank" rel="noopener">🧾 Apply for Financing (English)</a>
+            <a id="mFinEs" class="mBtn fin-es" href="#" target="_blank" rel="noopener">🇲🇽 Aplicar para Financiamiento (Español)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <script>
-
-const PHONE="15016975206"
-
-const SHEET_CSV="https://docs.google.com/spreadsheets/d/e/2PACX-1vQOqE8GSpsQgfUtVpWqMXj9a35XXBRQ0O86yMB3nm5OXizqTYN3-Wv0KTxF5nCat1ljR4HDM93sY29O/pub?output=csv"
-
-let INVENTORY=[]
-
-
-function splitList(v){
-return String(v||"").split(",").map(s=>s.trim()).filter(Boolean)
-}
-
-function money(n){
-return "$"+Number(n||0).toLocaleString()
-}
-
-function milesFmt(n){
-return Number(n||0).toLocaleString()+" miles"
-}
-
-
-function normalizeDropbox(url){
-
-let u=url
-
-u=u.replace("www.dropbox.com","dl.dropboxusercontent.com")
-
-u=u.replace("dl=0","raw=1")
-
-return u
-}
-
-
-function parseCSV(text){
-
-let rows=text.split("\n").map(r=>r.split(","))
-
-let header=rows.shift().map(h=>h.trim().toLowerCase())
-
-function idx(name){
-return header.indexOf(name)
-}
-
-rows.forEach(r=>{
-
-let obj={
-
-title:r[idx("title")],
-
-price:r[idx("price")],
-
-miles:r[idx("miles")],
-
-color:r[idx("color")],
-
-drivetrain:r[idx("drivetrain")],
-
-cab:r[idx("cab")],
-
-notes:r[idx("notes")],
-
-images:splitList(r[idx("photos")]).map(normalizeDropbox),
-
-video:normalizeDropbox(r[idx("video")])
-
-}
-
-if(obj.title)INVENTORY.push(obj)
-
-})
-
-}
-
-
-async function loadInventory(){
-
-let res=await fetch(SHEET_CSV)
-
-let txt=await res.text()
-
-parseCSV(txt)
-
-renderInventory()
-
-}
-
-
-function renderInventory(){
-
-let grid=document.getElementById("invGrid")
-
-grid.innerHTML=""
-
-INVENTORY.forEach((v,i)=>{
-
-let img=v.images[0]
-
-let card=document.createElement("div")
-
-card.className="invCard"
-
-card.innerHTML=`
-
-<img src="${img}">
-
-<div class="invBody">
-
-<b>${v.title}</b>
-
-<p>${money(v.price)}</p>
-
-</div>
-
-`
-
-card.onclick=()=>openVehicle(i)
-
-grid.appendChild(card)
-
-})
-
-}
-
-
-function openVehicle(i){
-
-let v=INVENTORY[i]
-
-document.getElementById("mTitle").innerText=v.title
-
-document.getElementById("mPrice").innerText=money(v.price)
-
-document.getElementById("mMeta").innerText=[v.color,v.cab,v.drivetrain,milesFmt(v.miles)].join(" • ")
-
-document.getElementById("mNotes").innerText=v.notes
-
-document.getElementById("mImg").src=v.images[0]
-
-let sms=`Hi I'm interested in the ${v.title}`
-
-document.getElementById("mText").href=`sms:${PHONE}?body=${encodeURIComponent(sms)}`
-
-document.getElementById("videoOpen").href=v.video
-
-document.getElementById("modalBackdrop").classList.add("show")
-
-}
-
-
-document.getElementById("modalBackdrop").onclick=(e)=>{
-
-if(e.target.id==="modalBackdrop")
-
-document.getElementById("modalBackdrop").classList.remove("show")
-
-}
-
-
-document.getElementById("leadForm").addEventListener("submit",function(e){
-
-e.preventDefault()
-
-const name=document.getElementById("name").value
-
-const phone=document.getElementById("phone").value
-
-const vehicle=document.getElementById("vehicle").value
-
-const message=document.getElementById("message").value
-
-const text=
-
-`New Website Lead:
-
-Name: ${name}
-
-Phone: ${phone}
-
-Vehicle: ${vehicle}
-
-Message: ${message}`
-
-window.location.href=`sms:${PHONE}?body=${encodeURIComponent(text)}`
-
-})
-
-
-loadInventory()
-
+  // ===================== SETTINGS =====================
+  const PHONE = "15016975206";
+  const FIN_EN = "https://finishlinemotorsports.startyourcreditapproval.com";
+  const FIN_ES = "https://finishlinemotorsports.startyourcreditapproval.com?lang=es";
+
+  const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQOqE8GSpsQgfUtVpWqMXj9a35XXBRQ0O86yMB3nm5OXizqTYN3-Wv0KTxF5nCat1ljR4HDM93sY29O/pub?output=csv";
+
+  const FALLBACK_IMAGE = "https://via.placeholder.com/1400x788?text=No+Photo";
+  let INVENTORY = [];
+  let activeFilter = "ALL";
+  let currentVehicle = null;
+  let imgIndex = 0;
+
+  const money = n => "$" + Number(n || 0).toLocaleString();
+  const milesFmt = n => Number(n || 0).toLocaleString() + " miles";
+
+  function smsLink(message){
+    const ios = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    return `sms:${PHONE}${ios ? "&body=" : "?body="}${encodeURIComponent(message)}`;
+  }
+
+  function badgeTone(text){
+    const t = String(text).toUpperCase();
+    if (t.includes("NEW") || t.includes("JUST") || t.includes("FRESH")) return "red";
+    if (t.includes("CLEAN") || t.includes("4WD") || t.includes("AWD")) return "green";
+    if (t.includes("DENALI") || t.includes("LTZ") || t.includes("Z71") || t.includes("SPORT")) return "gold";
+    return "";
+  }
+
+  function splitList(v){
+    return String(v || "").split(",").map(s => s.trim()).filter(Boolean);
+  }
+
+  function toNum(v){
+    const n = String(v || "").replace(/[^\d.]/g, "");
+    return n ? Number(n) : 0;
+  }
+
+  function csvSafeCell(row, index){
+    return index >= 0 && index < row.length ? String(row[index] || "").trim() : "";
+  }
+
+  function normalizeDropboxUrl(url){
+    if (!url) return "";
+    let out = String(url).trim();
+
+    out = out.replace("https://www.dropbox.com", "https://dl.dropboxusercontent.com");
+    out = out.replace("http://www.dropbox.com", "https://dl.dropboxusercontent.com");
+    out = out.replace("https://dropbox.com", "https://dl.dropboxusercontent.com");
+    out = out.replace("http://dropbox.com", "https://dl.dropboxusercontent.com");
+
+    out = out.replace(/([?&])st=[^&]*/gi, "");
+    out = out.replace(/[?&]dl=0/gi, "");
+    out = out.replace(/[?&]dl=1/gi, "");
+    out = out.replace(/[?&]raw=0/gi, "");
+    if (!/[?&]raw=1\b/i.test(out)) {
+      out += (out.includes("?") ? "&" : "?") + "raw=1";
+    }
+
+    out = out.replace(/\?&/, "?").replace(/&&+/g, "&");
+    return out;
+  }
+
+  function normalizeImageUrl(url){
+    const u = String(url || "").trim();
+    if (!u) return "";
+    if (/dropbox/i.test(u)) return normalizeDropboxUrl(u);
+    return u;
+  }
+
+  function normalizeVideoUrl(url){
+    const u = String(url || "").trim();
+    if (!u) return "";
+    if (/dropbox/i.test(u)) return normalizeDropboxUrl(u);
+    return u;
+  }
+
+  function isYoutube(url){ return /youtube\.com\/watch\?v=|youtu\.be\//i.test(url || ""); }
+  function youtubeEmbed(url){
+    let id = "";
+    const short = String(url || "").match(/youtu\.be\/([A-Za-z0-9_-]+)/);
+    const long = String(url || "").match(/[?&]v=([A-Za-z0-9_-]+)/);
+    id = (short && short[1]) || (long && long[1]) || "";
+    return id ? `https://www.youtube.com/embed/${id}` : "";
+  }
+
+  function isDrive(url){ return /drive\.google\.com/i.test(url || ""); }
+  function driveEmbed(url){
+    const m = String(url || "").match(/\/file\/d\/([^/]+)/);
+    return m ? `https://drive.google.com/file/d/${m[1]}/preview` : url;
+  }
+
+  function uniqueUrls(list){
+    const seen = new Set();
+    const out = [];
+    for (const item of list){
+      const key = String(item || "").trim();
+      if (!key || seen.has(key)) continue;
+      seen.add(key);
+      out.push(key);
+    }
+    return out;
+  }
+
+  function parseCSV(text){
+    const rows = [];
+    let row = [], field = "", inQuotes = false;
+
+    for (let i = 0; i < text.length; i++){
+      const c = text[i];
+      const next = text[i+1];
+
+      if (c === '"' && inQuotes && next === '"'){ field += '"'; i++; continue; }
+      if (c === '"'){ inQuotes = !inQuotes; continue; }
+      if (c === "," && !inQuotes){ row.push(field); field = ""; continue; }
+
+      if ((c === "\n" || c === "\r") && !inQuotes){
+        if (field.length || row.length){
+          row.push(field); field = "";
+          rows.push(row);
+          row = [];
+        }
+        if (c === "\r" && next === "\n") i++;
+        continue;
+      }
+      field += c;
+    }
+
+    if (field.length || row.length){
+      row.push(field);
+      rows.push(row);
+    }
+    return rows;
+  }
+
+  async function loadInventoryFromSheet(){
+    const url = SHEET_CSV_URL + (SHEET_CSV_URL.includes("?") ? "&" : "?") + "v=" + Date.now();
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) throw new Error("Sheet fetch failed: " + res.status);
+
+    const csv = await res.text();
+    const rows = parseCSV(csv);
+    const header = rows.shift().map(h => String(h).trim().toLowerCase());
+    const idx = (name) => header.indexOf(name);
+
+    const items = [];
+
+    for (const r of rows){
+      if (!r.some(cell => String(cell).trim() !== "")) continue;
+
+      const images = uniqueUrls(
+        splitList(csvSafeCell(r, idx("photos"))).map(normalizeImageUrl).filter(Boolean)
+      );
+
+      const item = {
+        id: csvSafeCell(r, idx("id")) || ("v" + Math.random().toString(16).slice(2)),
+        title: csvSafeCell(r, idx("title")),
+        category: (csvSafeCell(r, idx("category")) || "CAR").toUpperCase(),
+        price: toNum(csvSafeCell(r, idx("price"))),
+        miles: toNum(csvSafeCell(r, idx("miles"))),
+        color: csvSafeCell(r, idx("color")),
+        drivetrain: csvSafeCell(r, idx("drivetrain")),
+        cab: csvSafeCell(r, idx("cab")),
+        title_status: csvSafeCell(r, idx("title_status")),
+        notes: csvSafeCell(r, idx("notes")),
+        badges: splitList(csvSafeCell(r, idx("badges"))),
+        images,
+        video: normalizeVideoUrl(csvSafeCell(r, idx("video")))
+      };
+
+      if (item.title) items.push(item);
+    }
+
+    INVENTORY = items;
+  }
+
+  function getFiltered(){
+    if (activeFilter === "ALL") return INVENTORY;
+    return INVENTORY.filter(v => v.category === activeFilter);
+  }
+
+  function updateCount(){
+    const list = getFiltered();
+    const msg = `${list.length} Vehicle${list.length === 1 ? "" : "s"}`;
+    const el1 = document.getElementById("invCount");
+    const el2 = document.getElementById("invCountTop");
+    if (el1) el1.textContent = msg + " Available";
+    if (el2) el2.textContent = msg;
+  }
+
+  function buildCardImage(v){
+    return (v.images && v.images.length) ? v.images[0] : FALLBACK_IMAGE;
+  }
+
+  function renderInventory(){
+    const grid = document.getElementById("invGrid");
+    if (!grid) return;
+
+    const list = getFiltered();
+    updateCount();
+
+    if (!list.length){
+      grid.innerHTML = `<div style="padding:18px; color:rgba(245,247,251,.75);">No vehicles found for this filter yet.</div>`;
+      return;
+    }
+
+    grid.innerHTML = list.map(v => {
+      const img = buildCardImage(v);
+      const badgeHtml = (v.badges || []).slice(0,3).map(b => {
+        const tone = badgeTone(b);
+        return `<div class="badge ${tone}">${b}</div>`;
+      }).join("");
+
+      return `
+        <div class="invCard" role="button" tabindex="0" data-id="${v.id}" aria-label="View details for ${v.title}">
+          <div class="invMedia">
+            <img src="${img}" alt="${v.title}" loading="lazy" decoding="async"
+                 onerror="this.onerror=null;this.src='${FALLBACK_IMAGE}'">
+            <div class="badgeRow">${badgeHtml}</div>
+          </div>
+          <div class="invBody">
+            <p class="invName">${v.title}</p>
+            <p class="invMeta">${[v.color, v.cab, v.drivetrain, milesFmt(v.miles)].filter(Boolean).join(" • ")}</p>
+            <div class="invPriceRow">
+              <div class="invPrice">${money(v.price)}</div>
+              <div class="invCtaMini">Tap for details</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    grid.querySelectorAll(".invCard").forEach(card => {
+      card.addEventListener("click", () => openVehicle(card.dataset.id));
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") openVehicle(card.dataset.id);
+      });
+    });
+  }
+
+  // ===== Modal refs =====
+  const backdrop = document.getElementById("modalBackdrop");
+  const mTitle = document.getElementById("mTitle");
+  const mPrice = document.getElementById("mPrice");
+  const mMeta = document.getElementById("mMeta");
+  const mNotes = document.getElementById("mNotes");
+  const mText = document.getElementById("mText");
+  const mCall = document.getElementById("mCall");
+  const mFinEn = document.getElementById("mFinEn");
+  const mFinEs = document.getElementById("mFinEs");
+  const mClose = document.getElementById("mClose");
+
+  const mImg = document.getElementById("mImg");
+  const mDots = document.getElementById("mDots");
+  const mPrev = document.getElementById("mPrev");
+  const mNext = document.getElementById("mNext");
+  const photoOpen = document.getElementById("photoOpen");
+
+  const tabPhotos = document.getElementById("tabPhotos");
+  const tabVideo = document.getElementById("tabVideo");
+  const photoPane = document.getElementById("photoPane");
+  const videoPane = document.getElementById("videoPane");
+  const mVideo = document.getElementById("mVideo");
+  const mIframe = document.getElementById("mIframe");
+  const videoHint = document.getElementById("videoHint");
+  const videoOpen = document.getElementById("videoOpen");
+
+  function setDots(total, on){
+    if (!mDots) return;
+    mDots.innerHTML = "";
+    for (let i=0; i<total; i++){
+      const d = document.createElement("div");
+      d.className = "dot2" + (i === on ? " on" : "");
+      mDots.appendChild(d);
+    }
+  }
+
+  function applyImage(url){
+    const finalUrl = url || FALLBACK_IMAGE;
+    mImg.src = finalUrl;
+    photoOpen.href = finalUrl;
+    photoOpen.style.display = "inline-flex";
+  }
+
+  function showImage(index){
+    if (!currentVehicle) return;
+    const imgs = currentVehicle.images || [];
+    if (!imgs.length){
+      applyImage(FALLBACK_IMAGE);
+      setDots(0, 0);
+      mPrev.style.display = "none";
+      mNext.style.display = "none";
+      mDots.style.display = "none";
+      return;
+    }
+
+    imgIndex = (index + imgs.length) % imgs.length;
+    applyImage(imgs[imgIndex]);
+    setDots(imgs.length, imgIndex);
+
+    const many = imgs.length > 1;
+    mPrev.style.display = many ? "inline-flex" : "none";
+    mNext.style.display = many ? "inline-flex" : "none";
+    mDots.style.display = many ? "flex" : "none";
+  }
+
+  function showPhotosTab(){
+    tabPhotos.classList.add("active");
+    tabVideo.classList.remove("active");
+    photoPane.classList.add("show");
+    videoPane.classList.remove("show");
+  }
+
+  function showVideoTab(){
+    tabVideo.classList.add("active");
+    tabPhotos.classList.remove("active");
+    videoPane.classList.add("show");
+    photoPane.classList.remove("show");
+  }
+
+  function resetVideo(){
+    try { mVideo.pause(); } catch(e){}
+    mVideo.removeAttribute("src");
+    mVideo.load();
+    mVideo.style.display = "none";
+    mIframe.src = "";
+    mIframe.style.display = "none";
+    videoHint.style.display = "none";
+    videoOpen.style.display = "none";
+  }
+
+  function setupVideo(vurl){
+    resetVideo();
+
+    if (!vurl){
+      tabVideo.style.display = "none";
+      return;
+    }
+
+    tabVideo.style.display = "inline-flex";
+    videoHint.style.display = "block";
+    videoOpen.href = vurl;
+    videoOpen.style.display = "inline-flex";
+
+    if (isYoutube(vurl)){
+      const embed = youtubeEmbed(vurl);
+      if (embed){
+        mIframe.src = embed;
+        mIframe.style.display = "block";
+      }
+      return;
+    }
+
+    if (isDrive(vurl)){
+      mIframe.src = driveEmbed(vurl);
+      mIframe.style.display = "block";
+      return;
+    }
+
+    mVideo.src = vurl;
+    mVideo.style.display = "block";
+  }
+
+  function openVehicle(id){
+    const v = INVENTORY.find(x => x.id === id);
+    if (!v) return;
+
+    currentVehicle = v;
+    imgIndex = 0;
+
+    mTitle.textContent = v.title;
+    mPrice.textContent = money(v.price);
+
+    const metaBits = [
+      v.color,
+      v.cab,
+      v.drivetrain,
+      milesFmt(v.miles),
+      v.title_status ? (v.title_status + " title") : ""
+    ].filter(Boolean);
+
+    mMeta.textContent = metaBits.join(" • ");
+    mNotes.textContent = v.notes || "—";
+
+    const msg = `Hi Finish Line Motorsports, I'm interested in the ${v.title} listed for ${money(v.price)}. Is it available?`;
+    mText.href = smsLink(msg);
+    mCall.href = `tel:+${PHONE}`;
+    mFinEn.href = FIN_EN;
+    mFinEs.href = FIN_ES;
+
+    showImage(0);
+    setupVideo((v.video || "").trim());
+    showPhotosTab();
+
+    backdrop.classList.add("show");
+    backdrop.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal(){
+    backdrop.classList.remove("show");
+    backdrop.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    currentVehicle = null;
+    resetVideo();
+  }
+
+  mClose.addEventListener("click", closeModal);
+  backdrop.addEventListener("click", (e) => { if (e.target === backdrop) closeModal(); });
+
+  document.addEventListener("keydown", (e) => {
+    if (!backdrop.classList.contains("show")) return;
+    if (e.key === "Escape") closeModal();
+    if (e.key === "ArrowLeft") showImage(imgIndex - 1);
+    if (e.key === "ArrowRight") showImage(imgIndex + 1);
+  });
+
+  mPrev.addEventListener("click", (e) => { e.preventDefault(); showImage(imgIndex - 1); });
+  mNext.addEventListener("click", (e) => { e.preventDefault(); showImage(imgIndex + 1); });
+
+  let touchStartX = 0;
+  let touchEndX = 0;
+  mImg.addEventListener("touchstart", (e)=>{ touchStartX = e.changedTouches[0].screenX; }, {passive:true});
+  mImg.addEventListener("touchend", (e)=>{
+    touchEndX = e.changedTouches[0].screenX;
+    const dx = touchEndX - touchStartX;
+    if (Math.abs(dx) < 40) return;
+    if (dx > 0) showImage(imgIndex - 1);
+    else showImage(imgIndex + 1);
+  }, {passive:true});
+
+  mImg.addEventListener("error", () => {
+    if (mImg.src !== FALLBACK_IMAGE) {
+      applyImage(FALLBACK_IMAGE);
+    }
+  });
+
+  mVideo.addEventListener("error", () => {
+    videoHint.style.display = "block";
+    videoOpen.style.display = "inline-flex";
+  });
+
+  mVideo.addEventListener("loadedmetadata", () => {
+    videoOpen.style.display = "inline-flex";
+  });
+
+  tabPhotos.addEventListener("click", (e)=>{ e.preventDefault(); showPhotosTab(); });
+  tabVideo.addEventListener("click", (e)=>{
+    e.preventDefault();
+    if (tabVideo.style.display !== "none") showVideoTab();
+  });
+
+  function setActiveFilter(filter){
+    activeFilter = filter;
+    document.querySelectorAll(".fbtn").forEach(b => b.classList.toggle("active", b.dataset.filter === filter));
+    renderInventory();
+  }
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    document.querySelectorAll(".fbtn").forEach(btn => btn.addEventListener("click", () => setActiveFilter(btn.dataset.filter)));
+
+    try{
+      await loadInventoryFromSheet();
+    }catch(err){
+      console.warn(err);
+      INVENTORY = [{
+        id:"demo",
+        title:"Add vehicles to your Google Sheet to populate inventory",
+        category:"CAR",
+        price:0,
+        miles:0,
+        color:"—",
+        drivetrain:"",
+        cab:"",
+        title_status:"",
+        notes:"Add your photos in the photos column as direct Dropbox raw links separated by commas. Put one direct video link in the video column.",
+        badges:["CONNECTED"],
+        images:[FALLBACK_IMAGE],
+        video:""
+      }];
+    }
+
+    const msg = `${INVENTORY.length} Vehicle${INVENTORY.length === 1 ? "" : "s"}`;
+    const top = document.getElementById("invCountTop");
+    if (top) top.textContent = msg;
+
+    renderInventory();
+  });
 </script>
 
 </body>

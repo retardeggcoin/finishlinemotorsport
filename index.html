@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Finish Line Motorsports | Hot Springs, AR</title>
   <meta name="description" content="Used Cars, Trucks & SUVs in Hot Springs, AR. Easy financing. Se habla español. Call/Text 501-697-5206." />
 
@@ -35,18 +35,21 @@
                   radial-gradient(1100px 700px at 90% 10%, rgba(24,184,146,.10), transparent 60%),
                   linear-gradient(180deg, #0a0b10, #07070b);
       overflow-x:hidden;
+      -webkit-text-size-adjust:100%;
     }
 
     a{ color:inherit; text-decoration:none; }
+    img{ max-width:100%; }
 
     /* ====== NAV ====== */
     .navWrap{
       position:sticky;
       top:0;
       z-index:50;
-      background: rgba(9,10,14,.62);
+      background: rgba(9,10,14,.70);
       border-bottom: 1px solid rgba(255,255,255,.10);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
     .nav{
       max-width: var(--max);
@@ -56,12 +59,14 @@
       align-items:center;
       justify-content:space-between;
       gap:14px;
+      flex-wrap:wrap;
     }
     .brand{
       display:flex;
       align-items:center;
       gap:12px;
       min-width:0;
+      flex:1 1 auto;
     }
     .logo{
       width:44px; height:44px;
@@ -120,6 +125,7 @@
     .pill{
       display:inline-flex;
       align-items:center;
+      justify-content:center;
       gap:8px;
       padding: 10px 12px;
       border-radius: 999px;
@@ -130,6 +136,7 @@
       letter-spacing:.25px;
       text-transform: uppercase;
       transition: transform .12s ease, filter .12s ease;
+      min-height: 42px;
     }
     .pill:hover{ transform: translateY(-1px); filter: brightness(1.07); }
     .pill.red{
@@ -204,6 +211,7 @@
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.30);
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       font-weight: 950;
       text-transform: uppercase;
       letter-spacing:.35px;
@@ -256,6 +264,8 @@
       transition: transform .12s ease, filter .12s ease;
       cursor:pointer;
       user-select:none;
+      min-height: 48px;
+      text-align:center;
     }
     .btn:hover{ transform: translateY(-1px); filter: brightness(1.08); }
     .btn:active{ transform: translateY(0px); filter: brightness(1.00); }
@@ -270,6 +280,7 @@
     .btn.ghost{
       background: rgba(0,0,0,.28);
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
     .heroRight{
@@ -282,6 +293,7 @@
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(15,17,24,.70);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       box-shadow: var(--shadow);
       overflow:hidden;
     }
@@ -378,6 +390,7 @@
       border: 1px solid rgba(255,255,255,.10);
       background: rgba(15,17,24,.55);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       box-shadow: var(--shadow);
       overflow:hidden;
     }
@@ -425,6 +438,7 @@
       cursor:pointer;
       user-select:none;
       transition: filter .12s ease, transform .12s ease;
+      min-height: 40px;
     }
     .fbtn:hover{ filter: brightness(1.08); transform: translateY(-1px); }
     .fbtn.active{
@@ -468,6 +482,7 @@
       display:block;
       transform: scale(1.02);
       filter: contrast(1.05) saturate(1.02);
+      background: rgba(255,255,255,.04);
     }
 
     .badgeRow{
@@ -494,6 +509,7 @@
       border:1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.45);
       backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       color: rgba(255,255,255,.92);
     }
     .badge.red{ border-color: rgba(226,43,43,.55); box-shadow: 0 0 14px rgba(226,43,43,.18); }
@@ -548,6 +564,7 @@
       border: 1px solid rgba(255,255,255,.10);
       background: rgba(15,17,24,.55);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       box-shadow: var(--shadow);
       padding: 16px;
       display:flex;
@@ -563,22 +580,25 @@
     .modalBackdrop{
       position:fixed;
       inset:0;
-      background: rgba(0,0,0,.74);
+      background: rgba(0,0,0,.80);
       display:none;
       align-items:center;
       justify-content:center;
-      padding: 18px;
+      padding: 12px;
       z-index: 9999;
     }
     .modalBackdrop.show{ display:flex; }
 
     .modal{
       width: min(1000px, 100%);
+      max-height: min(92vh, 920px);
       border-radius: 18px;
       overflow:hidden;
       border: 1px solid rgba(255,255,255,.12);
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
       box-shadow: 0 22px 70px rgba(0,0,0,.70);
+      display:flex;
+      flex-direction:column;
     }
     .modalTop{
       padding: 12px 14px;
@@ -588,6 +608,7 @@
       gap:10px;
       background: rgba(0,0,0,.25);
       border-bottom: 1px solid rgba(255,255,255,.10);
+      flex: 0 0 auto;
     }
     .modalTop strong{
       font-weight: 980;
@@ -604,13 +625,17 @@
       cursor:pointer;
       text-transform: uppercase;
       font-size: 12px;
+      min-height: 40px;
     }
     .modalGrid{
       display:grid;
       grid-template-columns: 1.15fr .85fr;
+      min-height:0;
+      flex:1 1 auto;
+      overflow:hidden;
     }
     @media (max-width: 860px){
-      .modalGrid{ grid-template-columns: 1fr; }
+      .modalGrid{ grid-template-columns: 1fr; overflow-y:auto; }
     }
 
     .modalMedia{
@@ -627,6 +652,7 @@
       display:flex;
       gap:8px;
       z-index:2;
+      flex-wrap:wrap;
     }
     .tabBtn{
       border: 1px solid rgba(255,255,255,.16);
@@ -639,7 +665,9 @@
       font-size: 12px;
       cursor:pointer;
       backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       user-select:none;
+      min-height: 40px;
     }
     .tabBtn.active{
       border-color: rgba(246,196,69,.60);
@@ -649,6 +677,13 @@
     .pane.show{ display:block; }
 
     /* Photos */
+    #photoPane{
+      position:relative;
+      width:100%;
+      height:100%;
+      min-height:340px;
+      background:#000;
+    }
     #photoPane img{
       width:100%;
       height:100%;
@@ -656,6 +691,7 @@
       display:block;
       user-select:none;
       -webkit-user-drag:none;
+      background:#111;
     }
     .imgNav{
       position:absolute;
@@ -665,11 +701,12 @@
       justify-content:space-between;
       gap:10px;
       pointer-events:none;
+      z-index:2;
     }
     .navBtn{
       pointer-events:auto;
       border: 1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.40);
+      background: rgba(0,0,0,.55);
       color: rgba(255,255,255,.92);
       padding: 10px 12px;
       border-radius: 999px;
@@ -678,7 +715,10 @@
       text-transform: uppercase;
       font-size: 12px;
       backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       user-select:none;
+      min-height: 42px;
+      min-width: 70px;
     }
     .imgDots{
       pointer-events:none;
@@ -695,8 +735,33 @@
     }
     .dot2.on{ background: rgba(246,196,69,.95); border-color: rgba(246,196,69,.55); }
 
+    .photoOpenWrap{
+      position:absolute;
+      top:12px;
+      right:12px;
+      z-index:2;
+    }
+    .photoOpen{
+      display:none;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.55);
+      color: rgba(255,255,255,.92);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-weight: 980;
+      text-transform: uppercase;
+      font-size: 12px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      min-height: 40px;
+    }
+
     /* Video */
-    #videoPane{ padding: 44px 12px 12px; }
+    #videoPane{
+      padding: 56px 12px 12px;
+      min-height: 340px;
+      background:#000;
+    }
     #videoPane video, #videoPane iframe{
       width:100%;
       height: 380px;
@@ -706,7 +771,11 @@
       display:none;
     }
     @media (max-width: 860px){
-      #videoPane video, #videoPane iframe{ height: 260px; }
+      #videoPane video, #videoPane iframe{ height: 240px; }
+      .modal{ max-height: 94vh; }
+      .modalMedia{ min-height: 260px; }
+      #photoPane{ min-height:260px; }
+      #videoPane{ min-height:260px; }
     }
     .videoHint{
       margin-top: 10px;
@@ -716,14 +785,18 @@
     }
     .videoOpen{
       display:none;
-      margin-top: 8px;
+      margin-top: 10px;
       color: rgba(255,255,255,.92);
       font-weight: 900;
       text-decoration:none;
-      border-bottom: 1px dashed rgba(255,255,255,.35);
       width: fit-content;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      padding: 10px 12px;
+      border-radius: 999px;
+      min-height: 42px;
+      align-items:center;
     }
-    .videoOpen:hover{ border-bottom-color: rgba(255,255,255,.75); }
 
     .modalInfo{
       padding: 14px;
@@ -731,6 +804,7 @@
       flex-direction:column;
       gap:10px;
       background: rgba(0,0,0,.14);
+      overflow-y:auto;
     }
     .mPrice{
       font-weight: 980;
@@ -740,14 +814,14 @@
     .mMeta{
       color: var(--muted);
       font-size: 13px;
-      line-height:1.3;
+      line-height:1.4;
     }
     .mNotes{
       padding-top: 8px;
       border-top: 1px solid rgba(255,255,255,.10);
       color: rgba(255,255,255,.86);
       font-size: 13px;
-      line-height: 1.45;
+      line-height: 1.5;
       min-height: 44px;
       white-space: pre-line;
     }
@@ -775,6 +849,8 @@
       cursor:pointer;
       user-select:none;
       transition: transform .12s ease, filter .12s ease;
+      min-height: 48px;
+      text-align:center;
     }
     .mBtn:hover{ transform: translateY(-1px); filter: brightness(1.08); }
     .mBtn.call{
@@ -810,8 +886,46 @@
     .footerInner b{ color: rgba(245,247,251,.88); }
 
     @media (max-width: 900px){
-      .heroInner{ grid-template-columns: 1fr; padding-top: 46px; }
+      .heroInner{
+        grid-template-columns: 1fr;
+        padding-top: 46px;
+      }
       .heroRight{ justify-content:flex-start; }
+    }
+
+    @media (max-width: 720px){
+      .nav{
+        align-items:flex-start;
+      }
+      .navLinks{
+        width:100%;
+        justify-content:flex-start;
+        gap:12px;
+      }
+      .navCtas{
+        width:100%;
+      }
+      .navCtas .pill{
+        flex:1 1 calc(50% - 5px);
+      }
+      .hero{
+        min-height:auto;
+      }
+      .heroInner{
+        padding: 28px 16px 28px;
+      }
+      .heroBtns .btn{
+        width:100%;
+      }
+      .section{
+        padding: 28px 16px;
+      }
+      .heroCard{
+        width:100%;
+      }
+      .mini{
+        min-width:100%;
+      }
     }
   </style>
 </head>
@@ -823,7 +937,7 @@
     <div class="nav">
       <div class="brand">
         <div class="logo">
-          <img src="E288C4E1-DDCC-4331-A991-C81C6205B4A8.PNG" alt="Finish Line Motorsports logo">
+          <img src="E288C4E1-DDCC-4331-A991-C81C6205B4A8.PNG" alt="Finish Line Motorsports logo" loading="eager" decoding="async">
         </div>
         <div class="brandTxt">
           <b>Finish Line Motorsports</b>
@@ -847,7 +961,7 @@
   <!-- HERO -->
   <section class="hero" aria-label="Hero">
     <div class="heroMedia">
-      <img src="copy_F2251ACB-8CC9-4351-8B84-317F70E3A30F.JPEG" alt="Finish Line Motorsports hero background">
+      <img src="copy_F2251ACB-8CC9-4351-8B84-317F70E3A30F.JPEG" alt="Finish Line Motorsports hero background" loading="eager" decoding="async">
     </div>
 
     <div class="heroInner">
@@ -992,8 +1106,12 @@
             <button id="tabVideo" class="tabBtn">Video</button>
           </div>
 
+          <div class="photoOpenWrap">
+            <a id="photoOpen" class="photoOpen" href="#" target="_blank" rel="noopener">Open Photo</a>
+          </div>
+
           <div id="photoPane" class="pane show">
-            <img id="mImg" src="" alt="Vehicle photo">
+            <img id="mImg" src="" alt="Vehicle photo" loading="eager" decoding="async">
             <div class="imgNav">
               <button id="mPrev" class="navBtn">◀ Prev</button>
               <div id="mDots" class="imgDots"></div>
@@ -1002,10 +1120,10 @@
           </div>
 
           <div id="videoPane" class="pane">
-            <video id="mVideo" controls playsinline preload="metadata"></video>
-            <iframe id="mIframe" title="Vehicle video" allowfullscreen></iframe>
-            <div id="videoHint" class="videoHint">If video doesn’t load, open it in a new tab.</div>
-            <a id="videoOpen" class="videoOpen" href="#" target="_blank" rel="noopener">Open video</a>
+            <video id="mVideo" controls playsinline webkit-playsinline preload="metadata" muted></video>
+            <iframe id="mIframe" title="Vehicle video" allowfullscreen playsinline></iframe>
+            <div id="videoHint" class="videoHint">If video doesn't load on your phone, tap the button below to open it directly.</div>
+            <a id="videoOpen" class="videoOpen" href="#" target="_blank" rel="noopener">Open Video</a>
           </div>
         </div>
 
@@ -1031,9 +1149,9 @@
   const FIN_EN = "https://finishlinemotorsports.startyourcreditapproval.com";
   const FIN_ES = "https://finishlinemotorsports.startyourcreditapproval.com?lang=es";
 
-  // Your Google Sheet CSV:
   const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQOqE8GSpsQgfUtVpWqMXj9a35XXBRQ0O86yMB3nm5OXizqTYN3-Wv0KTxF5nCat1ljR4HDM93sY29O/pub?output=csv";
 
+  const FALLBACK_IMAGE = "https://via.placeholder.com/1400x788?text=No+Photo";
   let INVENTORY = [];
   let activeFilter = "ALL";
   let currentVehicle = null;
@@ -1068,33 +1186,61 @@
     return index >= 0 && index < row.length ? String(row[index] || "").trim() : "";
   }
 
-  function isDropboxFolderLink(url){
-    return /dropbox\.com\/scl\/fo\//i.test(String(url || ""));
-  }
-
-  function isDropboxDirectFile(url){
-    return /dropbox\.com|dropboxusercontent\.com/i.test(String(url || "")) && /\.(jpg|jpeg|png|webp|gif)(\?|$)/i.test(String(url || ""));
-  }
-
-  function normalizeDropboxImage(url){
+  function normalizeDropboxUrl(url){
     if (!url) return "";
     let out = String(url).trim();
 
-    if (/dropboxusercontent\.com/i.test(out)) return out;
+    out = out.replace("https://www.dropbox.com", "https://dl.dropboxusercontent.com");
+    out = out.replace("http://www.dropbox.com", "https://dl.dropboxusercontent.com");
+    out = out.replace("https://dropbox.com", "https://dl.dropboxusercontent.com");
+    out = out.replace("http://dropbox.com", "https://dl.dropboxusercontent.com");
 
-    // remove dl=0 / dl=1 and replace with raw=1
-    out = out.replace(/[?&]dl=0/gi, "").replace(/[?&]dl=1/gi, "");
-    if (/dropbox\.com/i.test(out)){
+    out = out.replace(/([?&])st=[^&]*/gi, "");
+    out = out.replace(/[?&]dl=0/gi, "");
+    out = out.replace(/[?&]dl=1/gi, "");
+    out = out.replace(/[?&]raw=0/gi, "");
+    if (!/[?&]raw=1\b/i.test(out)) {
       out += (out.includes("?") ? "&" : "?") + "raw=1";
     }
+
+    out = out.replace(/\?&/, "?").replace(/&&+/g, "&");
     return out;
+  }
+
+  function normalizeImageUrl(url){
+    const u = String(url || "").trim();
+    if (!u) return "";
+    if (/dropbox/i.test(u)) return normalizeDropboxUrl(u);
+    return u;
+  }
+
+  function normalizeVideoUrl(url){
+    const u = String(url || "").trim();
+    if (!u) return "";
+    if (/dropbox/i.test(u)) return normalizeDropboxUrl(u);
+    return u;
+  }
+
+  function isYoutube(url){ return /youtube\.com\/watch\?v=|youtu\.be\//i.test(url || ""); }
+  function youtubeEmbed(url){
+    let id = "";
+    const short = String(url || "").match(/youtu\.be\/([A-Za-z0-9_-]+)/);
+    const long = String(url || "").match(/[?&]v=([A-Za-z0-9_-]+)/);
+    id = (short && short[1]) || (long && long[1]) || "";
+    return id ? `https://www.youtube.com/embed/${id}` : "";
+  }
+
+  function isDrive(url){ return /drive\.google\.com/i.test(url || ""); }
+  function driveEmbed(url){
+    const m = String(url || "").match(/\/file\/d\/([^/]+)/);
+    return m ? `https://drive.google.com/file/d/${m[1]}/preview` : url;
   }
 
   function uniqueUrls(list){
     const seen = new Set();
     const out = [];
     for (const item of list){
-      const key = item.trim();
+      const key = String(item || "").trim();
       if (!key || seen.has(key)) continue;
       seen.add(key);
       out.push(key);
@@ -1102,7 +1248,6 @@
     return out;
   }
 
-  // CSV parser (handles quoted commas)
   function parseCSV(text){
     const rows = [];
     let row = [], field = "", inQuotes = false;
@@ -1113,7 +1258,6 @@
 
       if (c === '"' && inQuotes && next === '"'){ field += '"'; i++; continue; }
       if (c === '"'){ inQuotes = !inQuotes; continue; }
-
       if (c === "," && !inQuotes){ row.push(field); field = ""; continue; }
 
       if ((c === "\n" || c === "\r") && !inQuotes){
@@ -1135,75 +1279,6 @@
     return rows;
   }
 
-  // ===================== DROPBOX FOLDER SUPPORT =====================
-  // Best-effort parsing of a public Dropbox shared folder page.
-  // This depends on Dropbox page structure and may need adjustment later.
-  async function loadDropboxFolderImages(folderUrl){
-    try{
-      const cleanUrl = String(folderUrl).trim();
-      const proxied = "https://api.allorigins.win/raw?url=" + encodeURIComponent(cleanUrl);
-      const res = await fetch(proxied, { cache: "no-store" });
-      if (!res.ok) throw new Error("Proxy fetch failed: " + res.status);
-
-      const html = await res.text();
-      const found = [];
-
-      // Look for direct image URLs inside page source
-      const patterns = [
-        /https:\/\/[^"'\\\s]+?\.(?:jpg|jpeg|png|webp|gif)(?:\?[^"'\\\s]*)?/gi,
-        /https:\\\/\\\/[^"'\\\s]+?\.(?:jpg|jpeg|png|webp|gif)(?:\?[^"'\\\s]*)?/gi
-      ];
-
-      for (const pattern of patterns){
-        const matches = html.match(pattern) || [];
-        for (let u of matches){
-          u = u.replace(/\\\//g, "/");
-          if (/dropbox/i.test(u) || /dropboxusercontent/i.test(u)){
-            found.push(normalizeDropboxImage(u));
-          } else {
-            found.push(u);
-          }
-        }
-      }
-
-      // Sometimes Dropbox page includes encoded file paths
-      const extra = [];
-      const quotedImageNames = html.match(/[^"'\\\s]+\.(?:jpg|jpeg|png|webp|gif)/gi) || [];
-      for (const name of quotedImageNames){
-        if (!/^https?:/i.test(name)) extra.push(name);
-      }
-
-      // If folder page includes direct file hrefs, keep only image files
-      const finalImages = uniqueUrls(found).filter(u => /\.(jpg|jpeg|png|webp|gif)(\?|$)/i.test(u));
-
-      return finalImages;
-    }catch(err){
-      console.warn("Dropbox folder read failed:", err);
-      return [];
-    }
-  }
-
-  async function resolvePhotoCell(value){
-    const raw = String(value || "").trim();
-    if (!raw) return [];
-
-    const parts = splitList(raw);
-    let finalImages = [];
-
-    for (const part of parts){
-      if (isDropboxFolderLink(part)){
-        const folderImages = await loadDropboxFolderImages(part);
-        finalImages.push(...folderImages);
-      } else if (isDropboxDirectFile(part)){
-        finalImages.push(normalizeDropboxImage(part));
-      } else {
-        finalImages.push(part);
-      }
-    }
-
-    return uniqueUrls(finalImages);
-  }
-
   async function loadInventoryFromSheet(){
     const url = SHEET_CSV_URL + (SHEET_CSV_URL.includes("?") ? "&" : "?") + "v=" + Date.now();
     const res = await fetch(url, { cache: "no-store" });
@@ -1219,8 +1294,9 @@
     for (const r of rows){
       if (!r.some(cell => String(cell).trim() !== "")) continue;
 
-      const rawPhotos = csvSafeCell(r, idx("photos"));
-      const rawVideo = csvSafeCell(r, idx("video"));
+      const images = uniqueUrls(
+        splitList(csvSafeCell(r, idx("photos"))).map(normalizeImageUrl).filter(Boolean)
+      );
 
       const item = {
         id: csvSafeCell(r, idx("id")) || ("v" + Math.random().toString(16).slice(2)),
@@ -1234,8 +1310,8 @@
         title_status: csvSafeCell(r, idx("title_status")),
         notes: csvSafeCell(r, idx("notes")),
         badges: splitList(csvSafeCell(r, idx("badges"))),
-        images: await resolvePhotoCell(rawPhotos),
-        video: rawVideo
+        images,
+        video: normalizeVideoUrl(csvSafeCell(r, idx("video")))
       };
 
       if (item.title) items.push(item);
@@ -1258,6 +1334,10 @@
     if (el2) el2.textContent = msg;
   }
 
+  function buildCardImage(v){
+    return (v.images && v.images.length) ? v.images[0] : FALLBACK_IMAGE;
+  }
+
   function renderInventory(){
     const grid = document.getElementById("invGrid");
     if (!grid) return;
@@ -1271,7 +1351,7 @@
     }
 
     grid.innerHTML = list.map(v => {
-      const img = (v.images && v.images.length) ? v.images[0] : "https://via.placeholder.com/1400x788?text=No+Photo";
+      const img = buildCardImage(v);
       const badgeHtml = (v.badges || []).slice(0,3).map(b => {
         const tone = badgeTone(b);
         return `<div class="badge ${tone}">${b}</div>`;
@@ -1280,7 +1360,8 @@
       return `
         <div class="invCard" role="button" tabindex="0" data-id="${v.id}" aria-label="View details for ${v.title}">
           <div class="invMedia">
-            <img src="${img}" alt="${v.title}">
+            <img src="${img}" alt="${v.title}" loading="lazy" decoding="async"
+                 onerror="this.onerror=null;this.src='${FALLBACK_IMAGE}'">
             <div class="badgeRow">${badgeHtml}</div>
           </div>
           <div class="invBody">
@@ -1315,13 +1396,12 @@
   const mFinEs = document.getElementById("mFinEs");
   const mClose = document.getElementById("mClose");
 
-  // photos
   const mImg = document.getElementById("mImg");
   const mDots = document.getElementById("mDots");
   const mPrev = document.getElementById("mPrev");
   const mNext = document.getElementById("mNext");
+  const photoOpen = document.getElementById("photoOpen");
 
-  // video
   const tabPhotos = document.getElementById("tabPhotos");
   const tabVideo = document.getElementById("tabVideo");
   const photoPane = document.getElementById("photoPane");
@@ -1341,13 +1421,27 @@
     }
   }
 
+  function applyImage(url){
+    const finalUrl = url || FALLBACK_IMAGE;
+    mImg.src = finalUrl;
+    photoOpen.href = finalUrl;
+    photoOpen.style.display = "inline-flex";
+  }
+
   function showImage(index){
     if (!currentVehicle) return;
     const imgs = currentVehicle.images || [];
-    if (!imgs.length) return;
+    if (!imgs.length){
+      applyImage(FALLBACK_IMAGE);
+      setDots(0, 0);
+      mPrev.style.display = "none";
+      mNext.style.display = "none";
+      mDots.style.display = "none";
+      return;
+    }
 
     imgIndex = (index + imgs.length) % imgs.length;
-    mImg.src = imgs[imgIndex];
+    applyImage(imgs[imgIndex]);
     setDots(imgs.length, imgIndex);
 
     const many = imgs.length > 1;
@@ -1356,43 +1450,61 @@
     mDots.style.display = many ? "flex" : "none";
   }
 
-  function isYoutube(url){ return /youtube\.com\/watch\?v=|youtu\.be\//i.test(url); }
-  function youtubeEmbed(url){
-    let id = "";
-    const short = url.match(/youtu\.be\/([A-Za-z0-9_-]+)/);
-    const long = url.match(/[?&]v=([A-Za-z0-9_-]+)/);
-    id = (short && short[1]) || (long && long[1]) || "";
-    return id ? `https://www.youtube.com/embed/${id}` : "";
-  }
-  function isDrive(url){ return /drive\.google\.com/i.test(url); }
-  function driveEmbed(url){
-    const m = url.match(/\/file\/d\/([^/]+)/);
-    return m ? `https://drive.google.com/file/d/${m[1]}/preview` : url;
-  }
-  function isDropbox(url){ return /dropbox\.com|dropboxusercontent\.com/i.test(url); }
-
-  function normalizeDropboxVideo(url){
-    if (!url) return "";
-    let out = String(url).trim();
-    if (/dropboxusercontent\.com/i.test(out)) return out;
-    out = out.replace(/[?&]dl=0/gi, "").replace(/[?&]dl=1/gi, "");
-    if (/dropbox\.com/i.test(out)){
-      out += (out.includes("?") ? "&" : "?") + "raw=1";
-    }
-    return out;
-  }
-
   function showPhotosTab(){
     tabPhotos.classList.add("active");
     tabVideo.classList.remove("active");
     photoPane.classList.add("show");
     videoPane.classList.remove("show");
   }
+
   function showVideoTab(){
     tabVideo.classList.add("active");
     tabPhotos.classList.remove("active");
     videoPane.classList.add("show");
     photoPane.classList.remove("show");
+  }
+
+  function resetVideo(){
+    try { mVideo.pause(); } catch(e){}
+    mVideo.removeAttribute("src");
+    mVideo.load();
+    mVideo.style.display = "none";
+    mIframe.src = "";
+    mIframe.style.display = "none";
+    videoHint.style.display = "none";
+    videoOpen.style.display = "none";
+  }
+
+  function setupVideo(vurl){
+    resetVideo();
+
+    if (!vurl){
+      tabVideo.style.display = "none";
+      return;
+    }
+
+    tabVideo.style.display = "inline-flex";
+    videoHint.style.display = "block";
+    videoOpen.href = vurl;
+    videoOpen.style.display = "inline-flex";
+
+    if (isYoutube(vurl)){
+      const embed = youtubeEmbed(vurl);
+      if (embed){
+        mIframe.src = embed;
+        mIframe.style.display = "block";
+      }
+      return;
+    }
+
+    if (isDrive(vurl)){
+      mIframe.src = driveEmbed(vurl);
+      mIframe.style.display = "block";
+      return;
+    }
+
+    mVideo.src = vurl;
+    mVideo.style.display = "block";
   }
 
   function openVehicle(id){
@@ -1422,52 +1534,9 @@
     mFinEn.href = FIN_EN;
     mFinEs.href = FIN_ES;
 
-    if ((v.images || []).length){
-      showImage(0);
-    } else {
-      mImg.src = "https://via.placeholder.com/1400x788?text=No+Photos+Yet";
-      setDots(0, 0);
-      mPrev.style.display = "none";
-      mNext.style.display = "none";
-      mDots.style.display = "none";
-    }
-
-    const vurl = (v.video || "").trim();
-    videoOpen.href = vurl || "#";
-
-    // reset media
-    mVideo.pause();
-    mVideo.removeAttribute("src");
-    mVideo.load();
-    mIframe.src = "";
-    mIframe.style.display = "none";
-    mVideo.style.display = "none";
-    videoHint.style.display = "none";
-    videoOpen.style.display = "none";
-
-    if (vurl){
-      tabVideo.style.display = "inline-flex";
-      videoHint.style.display = "block";
-      videoOpen.style.display = "inline-flex";
-
-      if (isYoutube(vurl)){
-        mIframe.src = youtubeEmbed(vurl);
-        mIframe.style.display = "block";
-      } else if (isDrive(vurl)){
-        mIframe.src = driveEmbed(vurl);
-        mIframe.style.display = "block";
-      } else if (isDropbox(vurl)) {
-        mVideo.src = normalizeDropboxVideo(vurl);
-        mVideo.style.display = "block";
-      } else {
-        mVideo.src = vurl;
-        mVideo.style.display = "block";
-      }
-      showPhotosTab();
-    } else {
-      tabVideo.style.display = "none";
-      showPhotosTab();
-    }
+    showImage(0);
+    setupVideo((v.video || "").trim());
+    showPhotosTab();
 
     backdrop.classList.add("show");
     backdrop.setAttribute("aria-hidden", "false");
@@ -1479,11 +1548,7 @@
     backdrop.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
     currentVehicle = null;
-
-    mVideo.pause();
-    mVideo.removeAttribute("src");
-    mVideo.load();
-    mIframe.src = "";
+    resetVideo();
   }
 
   mClose.addEventListener("click", closeModal);
@@ -1499,7 +1564,6 @@
   mPrev.addEventListener("click", (e) => { e.preventDefault(); showImage(imgIndex - 1); });
   mNext.addEventListener("click", (e) => { e.preventDefault(); showImage(imgIndex + 1); });
 
-  // swipe
   let touchStartX = 0;
   let touchEndX = 0;
   mImg.addEventListener("touchstart", (e)=>{ touchStartX = e.changedTouches[0].screenX; }, {passive:true});
@@ -1511,8 +1575,26 @@
     else showImage(imgIndex + 1);
   }, {passive:true});
 
+  mImg.addEventListener("error", () => {
+    if (mImg.src !== FALLBACK_IMAGE) {
+      applyImage(FALLBACK_IMAGE);
+    }
+  });
+
+  mVideo.addEventListener("error", () => {
+    videoHint.style.display = "block";
+    videoOpen.style.display = "inline-flex";
+  });
+
+  mVideo.addEventListener("loadedmetadata", () => {
+    videoOpen.style.display = "inline-flex";
+  });
+
   tabPhotos.addEventListener("click", (e)=>{ e.preventDefault(); showPhotosTab(); });
-  tabVideo.addEventListener("click", (e)=>{ e.preventDefault(); if (tabVideo.style.display !== "none") showVideoTab(); });
+  tabVideo.addEventListener("click", (e)=>{
+    e.preventDefault();
+    if (tabVideo.style.display !== "none") showVideoTab();
+  });
 
   function setActiveFilter(filter){
     activeFilter = filter;
@@ -1537,9 +1619,9 @@
         drivetrain:"",
         cab:"",
         title_status:"",
-        notes:"Your site is live. Add rows in the Google Sheet. In the photos column, you can now paste either direct image links OR one Dropbox folder link. Then refresh this page.",
+        notes:"Add your photos in the photos column as direct Dropbox raw links separated by commas. Put one direct video link in the video column.",
         badges:["CONNECTED"],
-        images:["https://via.placeholder.com/1400x788?text=Add+Inventory+in+Google+Sheet"],
+        images:[FALLBACK_IMAGE],
         video:""
       }];
     }

@@ -41,7 +41,6 @@
     a{ color:inherit; text-decoration:none; }
     img{ max-width:100%; }
 
-    /* ====== NAV ====== */
     .navWrap{
       position:sticky;
       top:0;
@@ -148,7 +147,6 @@
       border-color: rgba(24,184,146,.55);
     }
 
-    /* ====== HERO ====== */
     .hero{
       position:relative;
       min-height: 72vh;
@@ -357,7 +355,6 @@
     }
     .heroCardCtas a{ width:100%; }
 
-    /* ====== SECTIONS ====== */
     .section{
       max-width: var(--max);
       margin: 0 auto;
@@ -384,7 +381,6 @@
       font-size: 13px;
     }
 
-    /* ====== INVENTORY ====== */
     .invShell{
       border-radius: var(--radius);
       border: 1px solid rgba(255,255,255,.10);
@@ -558,7 +554,6 @@
       white-space:nowrap;
     }
 
-    /* ====== CONTACT STRIP ====== */
     .contactStrip{
       border-radius: var(--radius);
       border: 1px solid rgba(255,255,255,.10);
@@ -576,7 +571,53 @@
     .contactStrip b{ font-weight:980; }
     .contactStrip span{ color: var(--muted); font-size: 13px; }
 
-    /* ====== MODAL ====== */
+    .leadShell{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(15,17,24,.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+    .leadGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .leadGrid .full{
+      grid-column: 1 / -1;
+    }
+    .field{
+      width:100%;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.28);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 14px 14px;
+      font-size: 14px;
+      outline:none;
+      min-height: 48px;
+    }
+    .field::placeholder{
+      color: rgba(245,247,251,.55);
+    }
+    textarea.field{
+      min-height: 120px;
+      resize: vertical;
+    }
+    .leadActions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 12px;
+    }
+    .leadNote{
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
     .modalBackdrop{
       position:fixed;
       inset:0;
@@ -676,7 +717,6 @@
     .pane{ display:none; width:100%; height:100%; }
     .pane.show{ display:block; }
 
-    /* Photos */
     #photoPane{
       position:relative;
       width:100%;
@@ -756,7 +796,6 @@
       min-height: 40px;
     }
 
-    /* Video */
     #videoPane{
       padding: 56px 12px 12px;
       min-height: 340px;
@@ -867,7 +906,6 @@
       border-color: rgba(246,196,69,.65);
     }
 
-    /* ====== FOOTER ====== */
     footer{
       border-top: 1px solid rgba(255,255,255,.10);
       background: rgba(0,0,0,.25);
@@ -926,13 +964,15 @@
       .mini{
         min-width:100%;
       }
+      .leadGrid{
+        grid-template-columns:1fr;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- NAV -->
   <div class="navWrap">
     <div class="nav">
       <div class="brand">
@@ -948,6 +988,7 @@
       <div class="navLinks">
         <a href="#inventory">Inventory</a>
         <a href="#financing">Financing</a>
+        <a href="#leadform">Lead Form</a>
         <a href="#contact">Contact</a>
       </div>
 
@@ -958,7 +999,6 @@
     </div>
   </div>
 
-  <!-- HERO -->
   <section class="hero" aria-label="Hero">
     <div class="heroMedia">
       <img src="copy_F2251ACB-8CC9-4351-8B84-317F70E3A30F.JPEG" alt="Finish Line Motorsports hero background" loading="eager" decoding="async">
@@ -1014,7 +1054,6 @@
     </div>
   </section>
 
-  <!-- INVENTORY -->
   <section id="inventory" class="section">
     <div class="sectionHeader">
       <div>
@@ -1040,7 +1079,6 @@
     </div>
   </section>
 
-  <!-- FINANCING -->
   <section id="financing" class="section">
     <div class="sectionHeader">
       <div>
@@ -1062,7 +1100,35 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <section id="leadform" class="section">
+    <div class="sectionHeader">
+      <div>
+        <h2>Instant Lead Form</h2>
+        <p>Shoppers can send you a quick inquiry without leaving the site.</p>
+      </div>
+    </div>
+
+    <div class="leadShell">
+      <form id="leadForm">
+        <div class="leadGrid">
+          <input class="field" type="text" id="leadName" placeholder="Full Name" required>
+          <input class="field" type="tel" id="leadPhone" placeholder="Phone Number" required>
+          <input class="field full" type="text" id="leadVehicle" placeholder="Vehicle Interested In (Example: 2015 Ford F250)">
+          <textarea class="field full" id="leadMessage" placeholder="Questions, budget, down payment, financing needs, trade-in info, etc."></textarea>
+        </div>
+
+        <div class="leadActions">
+          <button type="submit" class="btn primary">🚗 Send Inquiry</button>
+          <a class="btn ghost" href="sms:+15016975206">💬 Just Text Us Instead</a>
+        </div>
+
+        <div class="leadNote">
+          When the customer clicks Send Inquiry, it opens a text to 501-697-5206 with their info.
+        </div>
+      </form>
+    </div>
+  </section>
+
   <section id="contact" class="section">
     <div class="sectionHeader">
       <div>
@@ -1091,7 +1157,6 @@
     </div>
   </footer>
 
-  <!-- MODAL -->
   <div id="modalBackdrop" class="modalBackdrop" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-label="Vehicle details">
       <div class="modalTop">
@@ -1144,14 +1209,12 @@
   </div>
 
 <script>
-  // ===================== SETTINGS =====================
   const PHONE = "15016975206";
   const FIN_EN = "https://finishlinemotorsports.startyourcreditapproval.com";
   const FIN_ES = "https://finishlinemotorsports.startyourcreditapproval.com?lang=es";
-
   const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQOqE8GSpsQgfUtVpWqMXj9a35XXBRQ0O86yMB3nm5OXizqTYN3-Wv0KTxF5nCat1ljR4HDM93sY29O/pub?output=csv";
-
   const FALLBACK_IMAGE = "https://via.placeholder.com/1400x788?text=No+Photo";
+
   let INVENTORY = [];
   let activeFilter = "ALL";
   let currentVehicle = null;
@@ -1189,12 +1252,10 @@
   function normalizeDropboxUrl(url){
     if (!url) return "";
     let out = String(url).trim();
-
     out = out.replace("https://www.dropbox.com", "https://dl.dropboxusercontent.com");
     out = out.replace("http://www.dropbox.com", "https://dl.dropboxusercontent.com");
     out = out.replace("https://dropbox.com", "https://dl.dropboxusercontent.com");
     out = out.replace("http://dropbox.com", "https://dl.dropboxusercontent.com");
-
     out = out.replace(/([?&])st=[^&]*/gi, "");
     out = out.replace(/[?&]dl=0/gi, "");
     out = out.replace(/[?&]dl=1/gi, "");
@@ -1202,7 +1263,6 @@
     if (!/[?&]raw=1\b/i.test(out)) {
       out += (out.includes("?") ? "&" : "?") + "raw=1";
     }
-
     out = out.replace(/\?&/, "?").replace(/&&+/g, "&");
     return out;
   }
@@ -1384,7 +1444,6 @@
     });
   }
 
-  // ===== Modal refs =====
   const backdrop = document.getElementById("modalBackdrop");
   const mTitle = document.getElementById("mTitle");
   const mPrice = document.getElementById("mPrice");
@@ -1394,7 +1453,6 @@
   const mCall = document.getElementById("mCall");
   const mFinEn = document.getElementById("mFinEn");
   const mFinEs = document.getElementById("mFinEs");
-  const mClose = document.getElementById("mClose");
 
   const mImg = document.getElementById("mImg");
   const mDots = document.getElementById("mDots");
@@ -1410,6 +1468,7 @@
   const mIframe = document.getElementById("mIframe");
   const videoHint = document.getElementById("videoHint");
   const videoOpen = document.getElementById("videoOpen");
+  const mClose = document.getElementById("mClose");
 
   function setDots(total, on){
     if (!mDots) return;
@@ -1601,6 +1660,25 @@
     document.querySelectorAll(".fbtn").forEach(b => b.classList.toggle("active", b.dataset.filter === filter));
     renderInventory();
   }
+
+  document.getElementById("leadForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const name = document.getElementById("leadName").value.trim();
+    const phone = document.getElementById("leadPhone").value.trim();
+    const vehicle = document.getElementById("leadVehicle").value.trim();
+    const message = document.getElementById("leadMessage").value.trim();
+
+    const text =
+`New Website Lead
+
+Name: ${name}
+Phone: ${phone}
+Vehicle: ${vehicle || "Not specified"}
+Message: ${message || "No message"}`;
+
+    window.location.href = smsLink(text);
+  });
 
   document.addEventListener("DOMContentLoaded", async () => {
     document.querySelectorAll(".fbtn").forEach(btn => btn.addEventListener("click", () => setActiveFilter(btn.dataset.filter)));
